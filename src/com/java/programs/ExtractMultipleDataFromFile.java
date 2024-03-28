@@ -19,9 +19,9 @@ public class ExtractMultipleDataFromFile {
                 String mail = null;
                 for (String part : parts) {
                     if (part.startsWith("name:")) {
-                        name = part.substring(5); // Extract the name, removing "name: "
+                        name = part.substring(0); // Extract the name, removing "name: "
                     } else if (part.startsWith("mail:")) {
-                        mail = part.substring(5); // Extract the mail, removing "mail: "
+                        mail = part.substring(0); // Extract the mail, removing "mail: "
                     }
                 }
                 if (name != null && mail != null) {
@@ -35,7 +35,7 @@ public class ExtractMultipleDataFromFile {
 
         for (Integer key : dataMap.keySet()) {
             String[] values = dataMap.get(key);
-            System.out.println("Name " + key + ": " + values[0] + ", Mail: " + values[1]);
+            System.out.println(values[0] +" "+values[1]);
         }
     }
 }

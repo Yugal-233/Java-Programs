@@ -236,20 +236,29 @@ public class EmployeeDataStream {
         myMap.put("grey", "gr");
         myMap.put("green", "gn");
 
-        System.out.println("reversed order");
-        Map<String, String> sortedMap = myMap.entrySet()
-                .stream()
-                .sorted(Collections.reverseOrder(Map.Entry.comparingByKey()))
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+        TreeMap<String,String> treeMap = new TreeMap<>(myMap);
+        for(Map.Entry<String,String> myTreeMap: treeMap.entrySet()){
+            System.out.println("the key: "+myTreeMap.getKey()+" the value: "+myTreeMap.getValue());
+        }
 
-        //System.out.println("ascending order");
+
+
+
+
+//        System.out.println("reversed order");
 //        Map<String, String> sortedMap = myMap.entrySet()
 //                .stream()
-//                .sorted(Map.Entry.comparingByKey())
+//                .sorted(Collections.reverseOrder(Map.Entry.comparingByKey()))
 //                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
-
-        for (Map.Entry<String, String> entry : sortedMap.entrySet()) {
-            System.out.println(entry.getKey() + ": " + entry.getValue());
-        }
+//
+//        //System.out.println("ascending order");
+////        Map<String, String> sortedMap = myMap.entrySet()
+////                .stream()
+////                .sorted(Map.Entry.comparingByKey())
+////                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+//
+//        for (Map.Entry<String, String> entry : sortedMap.entrySet()) {
+//            System.out.println(entry.getKey() + ": " + entry.getValue());
+//        }
     }
 }
