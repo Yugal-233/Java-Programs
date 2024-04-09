@@ -18,7 +18,6 @@ class Derived extends Base {
     }
 }
 public class StaticMethodOverride {
-
     public static void main(String args[]) {
         Base obj = new Derived();
         System.out.print(obj.add(4, 5));

@@ -4,7 +4,7 @@ interface MyInterf1{
     void display();
 }
 @FunctionalInterface
-interface MyInterf2 extends MyInterf1 {
+interface MyInterf2 extends MyInterf1{
     void display();
 }
 public class FIImplInChild {
