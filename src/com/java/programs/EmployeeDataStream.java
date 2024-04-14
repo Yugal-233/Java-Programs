@@ -207,7 +207,7 @@ public class EmployeeDataStream {
 
         System.out.println("*******************second highest salary from each department*************************");
 
-// Group employees by department (deptId)
+        // Group employees by department (deptId)
         Map<Integer, List<Employee>> departmentEmployees = myList.stream()
                 .collect(Collectors.groupingBy(Employee::getDeptId));
 
