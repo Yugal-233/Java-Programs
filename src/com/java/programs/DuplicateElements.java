@@ -10,12 +10,18 @@ public class DuplicateElements {
         Set<Integer> myset =  new HashSet<>();
         myList1.stream().filter(n->!myset.add(n)).forEach(System.out::println);
 
-        Map<Integer, Long> mapInt = myList1.stream().collect(Collectors.groupingBy(i->i, Collectors.counting()));
+        Map<Integer, Long> mapInt = myList1.stream().collect(Collectors.groupingBy(i->i,LinkedHashMap::new, Collectors.counting()));
         mapInt.forEach((value,count)->{
             if(count>1){
                 System.out.println("duplicate integers are :: "+value);
             }else System.out.println("non duplicate integers are :: "+value);
         });
+
+        List<Integer> collect = mapInt.entrySet().stream()
+                .filter(entry -> entry.getValue() == 1)
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
+        System.out.println(collect);
 
         System.out.println("**********************************");
         List<String> myList2 = Arrays.asList("Nikita","Yugal", "Mayur", "Sanket","Nikita");

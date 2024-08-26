@@ -4,12 +4,12 @@ select max(salary) from employee where salary not in  (select max(salary) from e
 select max(salary) from employee where salary < (select max(salary) from employee);
 select empName, salary from Employee e1 where N-1 = (select count (distinct salary) from employee e2 where e2.salary>e1.salary);
 
-SQL Query to find Max Salary from each department.
+SQL Query to find Max Salary from each department
 
 select deptId, max(salary) from employee group by deptId
 select deptName, max(salary) from employee join department on employee.deptId=department.deptId group by deptName;
 
-Write an SQL Query to print the name of the distinct employee whose DOB is between 01/01/1960 to 31/12/1975.
+Write an SQL Query to print the name of the distinct employee whose DOB is between 01/01/1960 to 31/12/1975
 
 select distinct(empName) from employee where dob between  01/01/1960 and 31/12/1975
 
@@ -108,12 +108,11 @@ SELECT ProjectName, COUNT(EmployeeID) AS EmployeeCount FROM Projects GROUP BY Pr
 
 
 with rowSalary as
-	(select emplname, emplSalary, row_number over (partition by department order by salary desc) as salary_rank from employee)
+	(select emplname, emplSalary, row_number() over (partition by department order by salary desc) as salary_rank from employee)
 		select emplName, salary from rowSalary where salary_rank=2;
 
 
 With duplicate as(
 		select emplName, emplId, row_number() over(partition by emplName order by emplName) as rank
 		from employee)
-
 delete from duplicate where rank>1;

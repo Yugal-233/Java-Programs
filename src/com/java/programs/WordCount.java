@@ -10,5 +10,10 @@ public class WordCount {
                 .count();
 
         System.out.println("Number of words in the string: " + wordCount);
+
+
+        String s = str.replaceAll("\\d", "");
+        System.out.println(s);
+
     }
 }

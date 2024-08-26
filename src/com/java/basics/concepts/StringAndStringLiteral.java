@@ -12,5 +12,7 @@ public class StringAndStringLiteral {
         String s7="amit";                              // create 0 objs,  refer scp only
         String s8 = new String("gaju");     // create 2 objs,  in heap and scp
 
+        System.out.println(s4==s7);
+
     }
 }

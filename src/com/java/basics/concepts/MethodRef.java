@@ -5,8 +5,9 @@ interface MethodRefData{
 }
 
 class MethodRef{
-    public static void add(){
+    public static int add(){
         System.out.println("adding the data");
+        return 10;
     }
 
     public static void main(String[] args) {

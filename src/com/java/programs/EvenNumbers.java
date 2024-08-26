@@ -2,6 +2,7 @@ package com.java.programs;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -19,5 +20,12 @@ public class EvenNumbers {
         }
         System.out.println("*************************************");
         myList.stream().filter(i->i%2==0).forEach(System.out::println);         //3
+
+        Map<Boolean, List<Integer>> collect = myList.stream().collect(Collectors.partitioningBy(i -> i % 2 == 0));
+
+        List<Integer> evenNumber= collect.get(true);
+        System.out.println("evenNumber: "+evenNumber);
+        List<Integer> oddNumber = collect.get(false);
+        System.out.println("oddNumber: "+oddNumber);
     }
 }

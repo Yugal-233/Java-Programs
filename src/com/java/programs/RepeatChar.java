@@ -9,9 +9,9 @@ import static java.util.stream.Collectors.groupingBy;
 
 public class RepeatChar {
     public static void main(String[] args) {
-        String str = "abcdefghbd";
+        String str = "abbcdefghbda";
 
-        char repeatChar1 = str.chars().mapToObj(c->(char)c).filter(c-> str.indexOf(c)!=str.lastIndexOf(c)).findFirst().orElse(' ');
+        char repeatChar1 = str.chars().mapToObj(c->(char)c).filter(c-> str.indexOf(c)==str.lastIndexOf(c)).findFirst().orElse(' ');
         char repeatChar2 = str.codePoints().mapToObj(c->(char)c).filter(c-> str.indexOf(c)!=str.lastIndexOf(c)).findFirst().orElse(' ');
 
         if (repeatChar1 != ' ') {

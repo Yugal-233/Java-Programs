@@ -67,7 +67,7 @@ public class EmployeeDataStream {
     public static void main(String[] args) {
 
         ArrayList<Employee> myList = new ArrayList<>();
-        myList.add(new Employee(101, "mahesh", 80000, 101, "active"));
+        myList.add(new Employee(101, "mahesh", 50000, 101, "active"));
         myList.add(new Employee(102, "sagar", 170000, 101, "active"));
         myList.add(new Employee(103, "yugal", 65000, 102, "inactive"));
         myList.add(new Employee(104, "nikita", 70000, 102, "inactive"));
@@ -83,9 +83,10 @@ public class EmployeeDataStream {
                 myList.stream().sorted(Comparator.comparingInt(Employee::getSalary).reversed()).collect(Collectors.toList());
         System.out.println(collect2);
 
+        System.out.println("****************employee.getSalary() > 10000**************************");
         Map<String, Integer> highSalaryEmployees = myList.stream()
-                .filter(employee -> employee.getSalary() > 10000)
-                .collect(Collectors.toMap(Employee::getName, Employee::getSalary));
+                        .filter(empl->empl.getSalary()>60000)
+                                .collect(Collectors.toMap(Employee::getName,Employee::getSalary));
         System.out.println(highSalaryEmployees);
 
 
@@ -93,6 +94,7 @@ public class EmployeeDataStream {
         Employee secondHighestSalaryEmployee = myList.stream()
                 .sorted(Comparator.comparingDouble(Employee::getSalary).reversed())
                 .skip(1)
+                .distinct()
                 .findFirst()
                 .orElse(null);
         System.out.println(secondHighestSalaryEmployee);
@@ -101,6 +103,7 @@ public class EmployeeDataStream {
         myList.sort(Comparator.comparing(Employee::getSalary).reversed().thenComparing(Comparator.comparing(Employee::getName).reversed()));
         myList.forEach(System.out::println);
 
+        System.out.println("********************Sort by salary and then by name**********************");
         myList.sort(Comparator.comparing(Employee::getSalary).thenComparing(Employee::getName));
         myList.forEach(System.out::println);
 
@@ -111,7 +114,7 @@ public class EmployeeDataStream {
         myList.stream().filter(employee -> employee.salary >= 70000).forEach(employee -> System.out.println(employee));
 
         System.out.println("..........................limit............................");
-        myList.stream().sorted(Comparator.comparingInt(Employee::getSalary).reversed()).limit(1).forEach(employee -> System.out.println(employee));
+        myList.stream().sorted(Comparator.comparingInt(Employee::getSalary).reversed()).limit(1).collect(Collectors.toList()).forEach(System.out::println);
 
         System.out.println("............................third salary..........................");
         myList.stream().sorted((e1, e2) -> e1.salary > e2.salary ? -1 : e1.salary < e2.salary ? 1 : 0).skip(2).limit(1).forEach(employee -> System.out.println(employee));
@@ -132,7 +135,7 @@ public class EmployeeDataStream {
         System.out.println("minValue : " + minValue.salary + " His name :: " + minValue.name);
 
         System.out.println("......................................................");
-        Employee minValue1 = myList.stream().min(Comparator.comparingInt(e -> e.salary)).get();
+        Employee minValue1 = myList.stream().min(Comparator.comparingInt(Employee::getSalary)).get();
         System.out.println("minValue : " + minValue1.salary + " His name :: " + minValue1.name);
 
 
@@ -195,7 +198,7 @@ public class EmployeeDataStream {
         Map<Integer, Optional<Employee>> maxSalEmp1 =myList.stream().collect(Collectors.groupingBy(s->s.getDeptId(), Collectors.reducing(BinaryOperator.maxBy(Comparator.comparing(Employee::getSalary)))));
         System.out.println(maxSalEmp1);
         System.out.println("*****************Max salary from each dep second way*******************");
-        Map<Integer, Optional<Employee>> maxSalEmp2 =myList.stream().collect(Collectors.groupingBy(s->s.getDeptId(), Collectors.maxBy(Comparator.comparingInt(Employee::getSalary))));
+        Map<Integer, Optional<Employee>> maxSalEmp2 =myList.stream().collect(Collectors.groupingBy(Employee::getDeptId, Collectors.maxBy(Comparator.comparingInt(Employee::getSalary))));
         System.out.println(maxSalEmp2);
 
         System.out.println("*****Total salary of specific department******************");
@@ -205,13 +208,19 @@ public class EmployeeDataStream {
                 .reduce(0, Integer::sum);
         System.out.println(totalSalary);
 
-        System.out.println("*******************second highest salary from each department*************************");
+        System.out.println("*****Average salary of specific department******************");
+        double avgSalary= myList.stream()
+                .filter(employee -> employee.getDeptId() == 101)
+                .mapToDouble(Employee::getSalary)
+                .average().orElse(0.0);
+        System.out.println(avgSalary);
 
+        System.out.println("*******************second highest salary from each department*************************");
         // Group employees by department (deptId)
         Map<Integer, List<Employee>> departmentEmployees = myList.stream()
                 .collect(Collectors.groupingBy(Employee::getDeptId));
 
-        // Find the second highest salary employee in each department
+        System.out.println("Find the second highest salary employee in each department");
         departmentEmployees.forEach((departmentId, employees) -> {
             List<Employee> secondHighestSalaryEmployees = employees.stream()
                     .sorted(Comparator.comparingInt(Employee::getSalary).reversed())
@@ -227,6 +236,7 @@ public class EmployeeDataStream {
                 System.out.println("Department " + departmentId + ": No second highest salary employee found.");
             }
         });
+
 
         Map<String, String> myMap = new HashMap<>();
         myMap.put("red", "rd");

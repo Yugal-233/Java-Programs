@@ -24,8 +24,8 @@ public class RepeatWordCount {
         }
 
         System.out.println("*****************************");
-        String s = "my name is yugal";
-        String [] strData = s.split(" ");
+
+        String [] strData = str.split(" ");
 
         String result = Arrays.stream(strData)
                 .map(word -> word.substring(0, 1).toUpperCase() + word.substring(1))

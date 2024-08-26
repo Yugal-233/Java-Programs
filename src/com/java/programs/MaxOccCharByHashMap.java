@@ -7,7 +7,7 @@ public class MaxOccCharByHashMap {
     public static void main(String[] args) {
         HashMap<Character,Integer> myMap =  new HashMap<>();
 
-        String s = "my name is yugal chaudhari";
+        String s = "my name is yugal chaudhariiii";
         s=s.replaceAll(" ","");
         for(char c :s.toCharArray()){
             if(myMap.containsKey(c)){
