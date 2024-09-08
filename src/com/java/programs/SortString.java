@@ -2,6 +2,7 @@ package com.java.programs;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class SortString {
     public static void main(String[] args) {
@@ -27,5 +28,9 @@ public class SortString {
             }
         }
         System.out.println(ch);
+
+        System.out.println("****************another approach***********");
+        String collect = str.chars().sorted().mapToObj(c -> (char) c).map(String::valueOf).collect(Collectors.joining());
+        System.out.println(collect);
     }
 }

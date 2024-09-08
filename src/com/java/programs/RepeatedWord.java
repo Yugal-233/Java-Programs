@@ -36,5 +36,22 @@ public class RepeatedWord {
 
         String firstRepWord= myListData.stream().filter(wrd->!mySetData.add(wrd)).findFirst().orElse(null);
         System.out.println(firstRepWord);
+
+
+        System.out.println("******************third approach*************");
+
+        String collect = Arrays.stream(strData).distinct().collect(Collectors.joining(" "));
+        System.out.println(collect);
+
+        System.out.println("******************forth approach*************");
+
+        Set<String> mySet = new HashSet<>(myListData);
+        List<String> myList = new ArrayList<>(mySet);
+        System.out.println(myList);
+
+        System.out.println("******************fifth approach*************");
+
+        List<String> dataList =  new ArrayList<>(new HashSet<>(myListData));
+        System.out.println(dataList);
     }
 }

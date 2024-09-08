@@ -11,7 +11,6 @@ class Employee {
     int salary;
     int deptId;
     String status;
-
     public Employee(int id, String name, int salary, int deptId, String status) {
         this.id = id;
         this.name = name;
@@ -19,7 +18,6 @@ class Employee {
         this.deptId = deptId;
         this.status = status;
     }
-
     public String getName() {
         return name;
     }
@@ -93,8 +91,8 @@ public class EmployeeDataStream {
         System.out.println("*************second highest salary employee*****************");
         Employee secondHighestSalaryEmployee = myList.stream()
                 .sorted(Comparator.comparingDouble(Employee::getSalary).reversed())
-                .skip(1)
                 .distinct()
+                .skip(1)
                 .findFirst()
                 .orElse(null);
         System.out.println(secondHighestSalaryEmployee);
@@ -157,7 +155,7 @@ public class EmployeeDataStream {
         Map<Integer, Set<String>> empSet=myList.stream().collect(Collectors.groupingBy(s->s.getDeptId(),Collectors.mapping(Employee::getName, Collectors.toSet())));
         System.out.println(empSet);
 
-        System.out.println("************************************");
+        System.out.println("*******************1111111111111111*****************");
         Map<Integer,List<String>> empList=myList.stream().collect(Collectors.groupingBy(s->s.getDeptId(),Collectors.mapping(Employee::getName, Collectors.toList())));
         System.out.println(empList);
 

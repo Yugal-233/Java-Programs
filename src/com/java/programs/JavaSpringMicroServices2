@@ -1,0 +1,135 @@
+JAVA QUESTIONS SET
+
+1. create simple API/service for create/update the user
+2. using one controller/method make the create/update the user
+3. how to validate the fields saying that user-id cannot be null, length of phone number should be 10 like that
+4. JPA repository - entities
+5. @Configuration @Bean
+6. any idea on Devops
+7. reactive programming
+8. Do you have experience with Data JPA?
+9. How does your Endpoint look like (API)?
+10. Custom validation on model eg name length phone number etc.
+11. How do we print an error response to an invalid input from a user like HTTP status 400? This field is mandatory, or phone number length must be 10.
+12. Global Exception Handlers concept.
+13. Write an entity class for a customer object having parameters (name, id) that combination to be a composite primary key how will I show that in my entity class.
+14. How will the corresponding JPA class look like?
+15. Write a custom query (eg. for getting the count of customers active)
+16. You have 2 databases both using Data JPA. How will you ensure which repository connects to which Database. Because at runtime we don't use any connection object.
+17. You have a list of customers. Write a code snippet to filter customers having age less than 25 using JAVA 8
+	features.
+18. How you configure Database, how you will manage environment specific properties. (Eg like dev will have different databases, production will have different database)
+19. Write a controller class for the update/create API. Write a single API that takes care of both.
+20. What processes are involved after a code is committed.
+21. What tools are used for the vulnerability scans, what we are using to take care of the third-party jars.
+22. Tell me about your process through your code check-in. Tell me all the steps involved from code local to the final stage.
+23. When do you go for array or arraylist
+24.How do you remove duplicates from the List.
+25.How you implement the spring application
+26. Your API getting timed out it takes more than 15 sec. How will you solve the issue for the users.
+27. write a java function to check whther a string is pallindrome.
+28.Using Streams, fetch the the third largest salary from the list of employees details.
+29. Test driven environmennt
+30.Solid design Pattern
+31.kafka basic
+32.concurrent hash map
+33.code deployment till production
+34.production deployment
+35.Implement an API from scratch to get a list of data
+36.Implement an API to search an object by passing any identifier(like details of product by passing product name)
+37.Asynchronous programming used in project
+38.what is DNS
+39.Messaging related info
+40.Design patterns used in project
+41. Event driven programming
+42. HTTP status codes
+"43.Tell me about your project and skills.
+44. For which client you have worked.
+45. How you are hendeling the authentication and authorization for downstream applications.
+46. What you used for authentication.
+47. My roles and responsibility in the project.
+48. What you use for asynchronous call in spring boot.
+49. How to achieve asynchronous calls in java.
+50. How to prevent the deadlock."
+51.If you must read Oracle dB data and update MySQL. How will you do it in a single Post call of a controller
+
+What is the role and responsibility in your project.
+last project design architecture.
+How to interact Angular to your REST Api.
+What is react programming.
+How to communicate two diffrent microservice like Service A and B.
+How to achieve asynchronous calls in microservice.
+What is kafka and How to use in your project.
+What is synchronised in multi therd.
+How to handle request in API getway.
+What is spring security and how to use in your project.
+Where you deploy your microservice.
+Details naming convention of REST Url.
+How to handle exception in asynchronous programing.
+Shashi JAVA 8 features
+AWS public vs private cloud
+How do you communicate between microservices (synch / asynch). How do you integrate your microservice,
+i.e how microservices gets called by other
+what is serilization / deserialization
+Write the sum of the integer as output pseduocode
+Kafka concepts.
+design pattern usage in microservice to solve the problems
+Lambda expressions
+
+
+1. What microservice pattern you have used?
+2. How microservice connect another service?
+3. How you are deploying microservice?
+4. How to add new funtionality to the existing serviecs?
+5. How to ensure that API request call will not fail in microservice?
+6. How to secure that microserice architecture?
+7. What is Actuator? what is the advantage of it? Which Spring cloud config server you have used?
+8. How you are giving different config properties in Microservice code?
+9. What is the deployment process of new service into Server? How to disable one server or use one server with spring boot?
+10. What all Java& features?
+11. Synchrilized collection and how it works.
+12. How to delete from a collection in syncronize environment?
+13. What is deadlock? How to avold?
+14. What is threadpool?
+15. Have you worked any database?
+16. What is WebFlux? Have you worked on any reactor programing in project?
+17. How you connect Database from Java? Few question on JPA
+18. Write a code to print the string without duplicate element (Eg String s = "sarath")
+Wina code to print the string without duplicate element (Eg Strings "sarath")
+Create a new HashMap without using existing collection.
+19. Example: String s = "bcda": Please sort the string without using predefined existing collection or method.
+
+Panel Questions
+Java Springboot: No programming but give controller programming questions
+Kafka:
+Microservices: for developing application, what is used?
+API related hands on knowledge
+Design Patterns: Have they submitted any design patterns in their project?
+Database used (Minimal exp required): SQL
+day to day activity
+involvement in requirement change
+how many database use
+write API URL from front end (configuring)
+spring boot what use sop module and JP
+how will u implement JP
+syncronous/async messages
+in spring kafka how do u handle serialization/deserializatiori in kafka
+spring security
+Do you know Microservices Architecture?
+how you are interacting with one to another microservices?
+how you would to secure call in microservices?
+If JWT then how would you use?
+Apache/Kafka? why do we use?
+
+Programming Questions
+1) Int 345: Get the first digit and last digit of interger and print sum of them? what will be best approach to solve this?
+2) Write a code to print the string without duplicate element (Eg Strings "sarath")
+3) Create a new HashMap without using existing collection.
+Example: String s = "bcda"; Please sort the string without using predefined existing collection or method.
+4) syncronize collection and how it works? How to delete from a collection in syncronize environment?n
+5) Remove Duplicates from ArrayList ex: List = [1, 10, 2, 2, 10, 3, 3, 3, 4, 5, 5]
+6) You have a list of customers. Write a code snippet to filter customers having age less than 25 using JAVA 8 features?
+7) write a program to Print Fibonacci Series?
+8) write a program to check whether string is pallindrome?
+9) write a program to reverse a string?
+10) integer a=1,b=3,c=2 find min and max num from integer? approach? write custom logic?

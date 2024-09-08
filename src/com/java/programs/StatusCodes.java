@@ -9,6 +9,7 @@ public class StatusCodes {
         100 = continue
         200= ok status
         201= created
+        202= accepted
         204=no content
         301= moved permanently
         302= found
