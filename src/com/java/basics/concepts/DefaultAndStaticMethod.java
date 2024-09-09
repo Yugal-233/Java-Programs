@@ -10,7 +10,7 @@ interface MyInterf{
     }
 }
 
-public class DefaultAndStaticMethod implements  MyInterf{
+public class DefaultAndStaticMethod implements MyInterf{
     @Override
     public void square(int a) {
         System.out.println(a*a);

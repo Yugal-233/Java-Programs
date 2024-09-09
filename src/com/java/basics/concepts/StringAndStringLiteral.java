@@ -11,8 +11,12 @@ public class StringAndStringLiteral {
         String s6="lina";                             // create 1 objs,  in scp only
         String s7="amit";                              // create 0 objs,  refer scp only
         String s8 = new String("gaju");     // create 2 objs,  in heap and scp
+        String s9 = "yugal";                        // create 0 objs,  refer scp only
 
         System.out.println(s4==s7);
+
+        System.out.println(s1==s3);
+        System.out.println(s1.equals(s9));
 
     }
 }
