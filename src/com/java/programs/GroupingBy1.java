@@ -52,7 +52,7 @@ public class GroupingBy1 {
 		stdData.add(new StudentDetails(4,"pramod",36));
 		stdData.add(new StudentDetails(5,"bhagawan",56));
 		stdData.add(new StudentDetails(6,"kiran",56));
-		stdData.add(new StudentDetails(7,"nikita",28));
+		stdData.add(new StudentDetails(7,"radha",28));
 		stdData.add(new StudentDetails(8,"leena",15));
 		
 		Map<Integer, List<StudentDetails>> stdMap=stdData.stream().collect(Collectors.groupingBy(s->s.getAge()));

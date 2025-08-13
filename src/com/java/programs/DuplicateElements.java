@@ -24,14 +24,14 @@ public class DuplicateElements {
         System.out.println(collect);
 
         System.out.println("**********************************");
-        List<String> myList2 = Arrays.asList("Nikita","Yugal", "Mayur", "Sanket","Nikita");
+        List<String> myList2 = Arrays.asList("Pratik","Yugal", "Mayur", "Sanket","Pratik");
         Set<String> mySet1 = new HashSet<>();
         myList2.stream().filter(n->!mySet1.add(n)).forEach(System.out::println);
 
 
         System.out.println("*************************");
 
-        List<String> myList3 = Arrays.asList("Nikita","Yugal", "Mayur", "Sanket","Nikita");
+        List<String> myList3 = Arrays.asList("Pratik","Yugal", "Mayur", "Sanket","Pratik");
         Map<String, Long> wordCountMap = myList3.stream()
                 .collect(Collectors.groupingBy(String::toString, Collectors.counting()));
 

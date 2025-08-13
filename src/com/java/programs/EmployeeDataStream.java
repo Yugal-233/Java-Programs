@@ -68,10 +68,10 @@ public class EmployeeDataStream {
         myList.add(new Employee(101, "mahesh", 50000, 101, "active"));
         myList.add(new Employee(102, "sagar", 170000, 101, "active"));
         myList.add(new Employee(103, "yugal", 65000, 102, "inactive"));
-        myList.add(new Employee(104, "nikita", 70000, 102, "inactive"));
+        myList.add(new Employee(104, "manav", 70000, 102, "inactive"));
         myList.add(new Employee(105, "radha", 170000, 103, "active"));
         myList.add(new Employee(106, "raghav", 85000, 103, "active"));
-        myList.add(new Employee(107, "bhavana", 30000, 104, "inactive"));
+        myList.add(new Employee(107, "krish", 30000, 104, "inactive"));
 
         List<Employee> collect1 =
                 myList.stream().sorted(Comparator.comparingInt(Employee::getSalary)).collect(Collectors.toList());

@@ -29,7 +29,7 @@ public class SynchronisedDemo {
         Display d = new Display();
         ThreadData t1 = new ThreadData(d,"Dhoni");
         ThreadData t2 = new ThreadData(d,"Yuvraj");
-        ThreadData t3 = new ThreadData(d,"Nikita");
+        ThreadData t3 = new ThreadData(d,"Raghav");
         t1.start();
         t2.start();
         t3.start();
