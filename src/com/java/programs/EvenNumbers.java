@@ -27,5 +27,6 @@ public class EvenNumbers {
         System.out.println("evenNumber: "+evenNumber);
         List<Integer> oddNumber = collect.get(false);
         System.out.println("oddNumber: "+oddNumber);
+
     }
 }

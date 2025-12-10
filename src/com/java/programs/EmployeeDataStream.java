@@ -223,8 +223,7 @@ public class EmployeeDataStream {
             List<Employee> secondHighestSalaryEmployees = employees.stream()
                     .sorted(Comparator.comparingInt(Employee::getSalary).reversed())
                     .skip(1) // Skip the first hidsghest salary employee
-                    .limit(1) // Take the second highest salary employee
-                    .collect(Collectors.toList());
+                    .limit(1).toList();
 
             if (!secondHighestSalaryEmployees.isEmpty()) {
                 Employee secondHighSalaryEmployee = secondHighestSalaryEmployees.get(0);
