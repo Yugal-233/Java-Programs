@@ -17,7 +17,7 @@ public class OTPGeneration {
         System.out.println(c.get());
 
         System.out.println("Second way");
-        int randomOTP= (int)(Math.random()*9000)+1000;
+        int randomOTP= (int)(Math.random()*9000)+100000;
         String OTPGenerate= String.valueOf(randomOTP);
         System.out.println(OTPGenerate);
     }

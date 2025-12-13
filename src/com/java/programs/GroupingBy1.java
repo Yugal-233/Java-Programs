@@ -58,7 +58,7 @@ public class GroupingBy1 {
 		Map<Integer, List<StudentDetails>> stdMap=stdData.stream().collect(Collectors.groupingBy(s->s.getAge()));
 		System.out.println(stdMap);
 		
-		Map<Integer,Set<String>> stdSet=stdData.stream().collect(Collectors.groupingBy(s->s.getAge(),Collectors.mapping(StudentDetails::getName, Collectors.toSet())));
+		Map<Integer,Set<String>> stdSet=stdData.stream().collect(Collectors.groupingBy(StudentDetails::getAge,Collectors.mapping(StudentDetails::getName, Collectors.toSet())));
 		System.out.println(stdSet);
 		
 		Map<Integer,List<String>> stdList=stdData.stream().collect(Collectors.groupingBy(s->s.getAge(),Collectors.mapping(StudentDetails::getName, Collectors.toList())));

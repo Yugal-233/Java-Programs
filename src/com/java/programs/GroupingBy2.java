@@ -15,8 +15,7 @@ public class GroupingBy2 {
 
         // Sort the items based on the count in descending order
         List<Map.Entry<String, Long>> sortedItems = collect1.entrySet().stream()
-                .sorted(Map.Entry.<String, Long>comparingByValue(Comparator.reverseOrder()))
-                .collect(Collectors.toList());
+                .sorted(Map.Entry.<String, Long>comparingByValue(Comparator.reverseOrder())).toList();
 
         // Print the results
         for (Map.Entry<String, Long> entry : sortedItems) {
