@@ -11,6 +11,7 @@ class Employee {
     int salary;
     int deptId;
     String status;
+
     public Employee(int id, String name, int salary, int deptId, String status) {
         this.id = id;
         this.name = name;
@@ -18,18 +19,19 @@ class Employee {
         this.deptId = deptId;
         this.status = status;
     }
+
     public String getName() {
         return name;
     }
-    public void setName(String name) {
-        this.name = name;
-    }
+
     public int getSalary() {
         return salary;
     }
+
     public int getDeptId() {
         return deptId;
     }
+
     public String getStatus() {
         return status;
     }
@@ -45,21 +47,6 @@ class Employee {
                 '}';
     }
 }
-//class myComp implements Comparator<Employee>{
-//
-//
-//    @Override
-//    public int compare(Employee e1, Employee e2) {
-//        if (e1.salary>e2.salary) {
-//            return -1;
-//        }
-//        else if (e1.salary<e2.salary) {
-//            return 1;
-//        }
-//        else
-//            return 0;
-//    }
-//}
 
 public class EmployeeDataStream {
     public static void main(String[] args) {
@@ -73,168 +60,149 @@ public class EmployeeDataStream {
         myList.add(new Employee(106, "raghav", 85000, 103, "active"));
         myList.add(new Employee(107, "krish", 30000, 104, "inactive"));
 
-        List<Employee> collect1 =
-                myList.stream().sorted(Comparator.comparingInt(Employee::getSalary)).collect(Collectors.toList());
+        System.out.println("************* sort by salary ascending ************");
+        List<Employee> collect1 = myList.stream()
+                .sorted(Comparator.comparingInt(Employee::getSalary))
+                .collect(Collectors.toList());
         System.out.println(collect1);
-        System.out.println("****************************************");
-        List<Employee> collect2 =
-                myList.stream().sorted(Comparator.comparingInt(Employee::getSalary).reversed()).collect(Collectors.toList());
+
+        System.out.println("************* sort by salary descending ************");
+        List<Employee> collect2 = myList.stream()
+                .sorted(Comparator.comparingInt(Employee::getSalary).reversed())
+                .collect(Collectors.toList());
         System.out.println(collect2);
 
-        System.out.println("****************employee.getSalary() > 10000**************************");
+        System.out.println("************* employees with salary > 60000 ************");
         Map<String, Integer> highSalaryEmployees = myList.stream()
-                        .filter(empl->empl.getSalary()>60000)
-                                .collect(Collectors.toMap(Employee::getName,Employee::getSalary));
+                .filter(e -> e.getSalary() > 60000)
+                .collect(Collectors.toMap(Employee::getName, Employee::getSalary));
         System.out.println(highSalaryEmployees);
 
-
-        System.out.println("*************second highest salary employee*****************");
+        System.out.println("************* second highest salary employee ************");
         Employee secondHighestSalaryEmployee = myList.stream()
-                .sorted(Comparator.comparingDouble(Employee::getSalary).reversed())
-                .distinct()
+                .sorted(Comparator.comparingInt(Employee::getSalary).reversed())
                 .skip(1)
                 .findFirst()
                 .orElse(null);
         System.out.println(secondHighestSalaryEmployee);
 
-        System.out.println("********************Sort by salary (descending) and then by name (descending)**********************");
-        myList.sort(Comparator.comparing(Employee::getSalary).reversed().thenComparing(Comparator.comparing(Employee::getName).reversed()));
+        System.out.println("************* sort by salary desc then name desc ************");
+        myList.sort(Comparator.comparing(Employee::getSalary).reversed()
+                .thenComparing(Comparator.comparing(Employee::getName).reversed()));
         myList.forEach(System.out::println);
 
-        System.out.println("********************Sort by salary and then by name**********************");
-        myList.sort(Comparator.comparing(Employee::getSalary).thenComparing(Employee::getName));
+        System.out.println("************* sort by salary asc then name asc ************");
+        myList.sort(Comparator.comparing(Employee::getSalary)
+                .thenComparing(Employee::getName));
         myList.forEach(System.out::println);
 
-        System.out.println("......................................................");
-        myList.stream().sorted((e1, e2) -> e1.salary > e2.salary ? -1 : e1.salary < e2.salary ? 1 : 0).forEach(employee -> System.out.println(employee));
+        System.out.println("************* custom comparator salary desc ************");
+        myList.stream()
+                .sorted((e1, e2) -> e1.salary > e2.salary ? -1 : e1.salary < e2.salary ? 1 : 0)
+                .forEach(System.out::println);
 
-        System.out.println("......................................................");
-        myList.stream().filter(employee -> employee.salary >= 70000).forEach(employee -> System.out.println(employee));
+        System.out.println("************* filter salary >= 70000 ************");
+        myList.stream()
+                .filter(e -> e.salary >= 70000)
+                .forEach(System.out::println);
 
-        System.out.println("..........................limit............................");
-        myList.stream().sorted(Comparator.comparingInt(Employee::getSalary).reversed()).limit(1).collect(Collectors.toList()).forEach(System.out::println);
+        System.out.println("************* highest salary using limit ************");
+        myList.stream()
+                .sorted(Comparator.comparingInt(Employee::getSalary).reversed())
+                .limit(1)
+                .forEach(System.out::println);
 
-        System.out.println("............................third salary..........................");
-        myList.stream().sorted((e1, e2) -> e1.salary > e2.salary ? -1 : e1.salary < e2.salary ? 1 : 0).skip(2).limit(1).forEach(employee -> System.out.println(employee));
+        System.out.println("************* third highest salary ************");
+        myList.stream()
+                .sorted(Comparator.comparingInt(Employee::getSalary).reversed())
+                .skip(2)
+                .limit(1)
+                .forEach(System.out::println);
 
-        System.out.println("............................third salary..........................");
-        myList.stream().sorted(Comparator.comparingInt(Employee::getSalary).reversed()).skip(2).limit(1).collect(Collectors.toList());
-
-        System.out.println("......................................................");
-        Predicate<Employee> p = emp1 -> emp1.salary > 70000;
+        System.out.println("************* predicate example salary > 70000 ************");
+        Predicate<Employee> p = emp -> emp.salary > 70000;
         for (Employee e : myList) {
             if (p.test(e)) {
                 System.out.println(e.name + " : " + e.salary);
             }
         }
 
-        System.out.println("......................................................");
-        Employee minValue = myList.stream().min((e1, e2) -> e1.salary < e2.salary ? -1 : e1.salary > e2.salary ? 1 : 0).get();
-        System.out.println("minValue : " + minValue.salary + " His name :: " + minValue.name);
+        System.out.println("************* minimum salary employee ************");
+        Employee minValue = myList.stream()
+                .min(Comparator.comparingInt(Employee::getSalary))
+                .orElse(null);
+        System.out.println(minValue);
 
-        System.out.println("......................................................");
-        Employee minValue1 = myList.stream().min(Comparator.comparingInt(Employee::getSalary)).get();
-        System.out.println("minValue : " + minValue1.salary + " His name :: " + minValue1.name);
+        System.out.println("************* maximum salary employee ************");
+        Employee maxValue = myList.stream()
+                .max(Comparator.comparingInt(Employee::getSalary))
+                .orElse(null);
+        System.out.println(maxValue);
 
+        System.out.println("************* group employees by department ************");
+        Map<Integer, List<Employee>> empMap = myList.stream()
+                .collect(Collectors.groupingBy(Employee::getDeptId));
+        empMap.forEach((k, v) -> System.out.println("Dept " + k + " -> " + v));
 
-        System.out.println("......................................................");
-        Employee maxValue = myList.stream().max((e1, e2) -> e1.salary < e2.salary ? -1 : e1.salary > e2.salary ? 1 : 0).get();
-        System.out.println("maxValue : " + maxValue.salary + " His name :: " + maxValue.name);
-
-        System.out.println("**********************Gruping by**************");
-        Map<Integer, List<Employee>> empMap=myList.stream().collect(Collectors.groupingBy(s->s.getDeptId()));
-        empMap.entrySet().forEach(result->{
-            System.out.println("key: "+result.getKey()+" Value: "+result.getValue());
-        });
-        System.out.println("**********************Gruping by**************");
-        Map<Integer, List<Employee>> empMap1=myList.stream().collect(Collectors.groupingBy(Employee::getDeptId));
-        empMap1.forEach((key, value) -> System.out.println("key: " + key + " Value: " + value));
-
-
-        System.out.println("**********************Gruping by**************");
-        Map<Integer, Set<String>> empSet=myList.stream().collect(Collectors.groupingBy(s->s.getDeptId(),Collectors.mapping(Employee::getName, Collectors.toSet())));
+        System.out.println("************* group by department with employee names set ************");
+        Map<Integer, Set<String>> empSet = myList.stream()
+                .collect(Collectors.groupingBy(Employee::getDeptId,
+                        Collectors.mapping(Employee::getName, Collectors.toSet())));
         System.out.println(empSet);
 
-        System.out.println("*******************1111111111111111*****************");
-        Map<Integer,List<String>> empList=myList.stream().collect(Collectors.groupingBy(s->s.getDeptId(),Collectors.mapping(Employee::getName, Collectors.toList())));
+        System.out.println("************* group by department with employee names list ************");
+        Map<Integer, List<String>> empList = myList.stream()
+                .collect(Collectors.groupingBy(Employee::getDeptId,
+                        Collectors.mapping(Employee::getName, Collectors.toList())));
         System.out.println(empList);
 
-        System.out.println("************************************");
-        HashMap<Integer, List<String>> empHashMap1=myList.stream().collect(Collectors.groupingBy(s->s.getDeptId(), HashMap::new, Collectors.mapping(Employee::getName , Collectors.toList())));
-        System.out.println(empHashMap1);
-
-        System.out.println("************************************");
-        Hashtable<Integer, List<String>> empHashTable=myList.stream().collect(Collectors.groupingBy(s->s.getDeptId(), Hashtable::new, Collectors.mapping(Employee::getName , Collectors.toList())));
-        System.out.println(empHashTable);
-
-        System.out.println("****************empHashMap2********************");
-        HashMap<Integer, List<String>> empHashMap2=myList.stream().collect(Collectors.groupingBy(s->s.getDeptId(), ()->new HashMap<>(), Collectors.mapping(Employee::getName , Collectors.toList())));
-        System.out.println(empHashMap2);
-
-        System.out.println("************************************");
-        Map<Integer, Long> empCount = myList.stream().collect(Collectors.groupingBy(s->s.getDeptId(), Collectors.counting()));
+        System.out.println("************* employee count per department ************");
+        Map<Integer, Long> empCount = myList.stream()
+                .collect(Collectors.groupingBy(Employee::getDeptId, Collectors.counting()));
         System.out.println(empCount);
 
-        System.out.println("************************************");
-        Map<Integer, Integer> empSum = myList.stream().collect(Collectors.groupingBy(Employee::getDeptId, Collectors.summingInt(Employee::getDeptId)));
-        System.out.println(empSum);
+        System.out.println("************* active and inactive employee count ************");
+        long activeEmp = myList.stream().filter(e -> e.getStatus().equalsIgnoreCase("active")).count();
+        long inactiveEmp = myList.stream().filter(e -> e.getStatus().equalsIgnoreCase("inactive")).count();
+        System.out.println("active=" + activeEmp + ", inactive=" + inactiveEmp);
 
-        System.out.println("************************************");
-        long activeEmp= myList.stream().filter(s->s.getStatus().equalsIgnoreCase("active")).count();
-        long inActiveEmp= myList.stream().filter(s->s.getStatus().equalsIgnoreCase("inactive")).count();
-        System.out.println("active: "+activeEmp);
-        System.out.println("inactive: "+inActiveEmp);
+        System.out.println("************* max salary employee overall ************");
+        System.out.println(myList.stream().max(Comparator.comparingInt(Employee::getSalary)));
 
-        System.out.println("*****************Max and min salary*******************");
-        Optional<Employee> maxEmp =myList.stream().max(Comparator.comparingInt(Employee::getSalary));
-        System.out.println(maxEmp);
+        System.out.println("************* min salary employee overall ************");
+        System.out.println(myList.stream().min(Comparator.comparingInt(Employee::getSalary)));
 
-        Optional<Employee> minEmp =myList.stream().min(Comparator.comparingInt(Employee::getSalary));
-        System.out.println(minEmp);
+        System.out.println("************* max salary per department ************");
+        Map<Integer, Optional<Employee>> maxSalEmp = myList.stream()
+                .collect(Collectors.groupingBy(Employee::getDeptId,
+                        Collectors.reducing(BinaryOperator.maxBy(Comparator.comparing(Employee::getSalary)))));
+        System.out.println(maxSalEmp);
 
-        System.out.println("*****************Max salary from each dep*******************");
-        Map<Integer, Optional<Employee>> maxSalEmp1 =myList.stream().collect(Collectors.groupingBy(s->s.getDeptId(), Collectors.reducing(BinaryOperator.maxBy(Comparator.comparing(Employee::getSalary)))));
-        System.out.println(maxSalEmp1);
-        System.out.println("*****************Max salary from each dep second way*******************");
-        Map<Integer, Optional<Employee>> maxSalEmp2 =myList.stream().collect(Collectors.groupingBy(Employee::getDeptId, Collectors.maxBy(Comparator.comparingInt(Employee::getSalary))));
-        System.out.println(maxSalEmp2);
-
-        System.out.println("*****Total salary of specific department******************");
-        double totalSalary = myList.stream()
-                .filter(employee -> employee.getDeptId()==101)
+        System.out.println("************* total salary of department 101 ************");
+        int totalSalary = myList.stream()
+                .filter(e -> e.getDeptId() == 101)
                 .map(Employee::getSalary)
                 .reduce(0, Integer::sum);
         System.out.println(totalSalary);
 
-        System.out.println("*****Average salary of specific department******************");
-        double avgSalary= myList.stream()
-                .filter(employee -> employee.getDeptId() == 101)
-                .mapToDouble(Employee::getSalary)
-                .average().orElse(0.0);
+        System.out.println("************* average salary of department 101 ************");
+        double avgSalary = myList.stream()
+                .filter(e -> e.getDeptId() == 101)
+                .mapToInt(Employee::getSalary)
+                .average()
+                .orElse(0.0);
         System.out.println(avgSalary);
 
-        System.out.println("*******************second highest salary from each department*************************");
-        // Group employees by department (deptId)
-        Map<Integer, List<Employee>> departmentEmployees = myList.stream()
-                .collect(Collectors.groupingBy(Employee::getDeptId));
+        System.out.println("************* second highest salary per department ************");
+        myList.stream()
+                .collect(Collectors.groupingBy(Employee::getDeptId))
+                .forEach((dept, employees) -> employees.stream()
+                        .sorted(Comparator.comparingInt(Employee::getSalary).reversed())
+                        .skip(1)
+                        .limit(1)
+                        .forEach(e -> System.out.println("Dept " + dept + " -> " + e.getName() + " : " + e.getSalary())));
 
-        System.out.println("Find the second highest salary employee in each department");
-        departmentEmployees.forEach((departmentId, employees) -> {
-            List<Employee> secondHighestSalaryEmployees = employees.stream()
-                    .sorted(Comparator.comparingInt(Employee::getSalary).reversed())
-                    .skip(1) // Skip the first hidsghest salary employee
-                    .limit(1).toList();
-
-            if (!secondHighestSalaryEmployees.isEmpty()) {
-                Employee secondHighSalaryEmployee = secondHighestSalaryEmployees.get(0);
-                System.out.println("Department " + departmentId + ": Second highest salary employee is " +
-                        secondHighSalaryEmployee.getName() + " with salary " + secondHighSalaryEmployee.getSalary());
-            } else {
-                System.out.println("Department " + departmentId + ": No second highest salary employee found.");
-            }
-        });
-
-
+        System.out.println("************* treemap sorting by key ************");
         Map<String, String> myMap = new HashMap<>();
         myMap.put("red", "rd");
         myMap.put("blue", "bl");
@@ -242,30 +210,6 @@ public class EmployeeDataStream {
         myMap.put("orange", "or");
         myMap.put("grey", "gr");
         myMap.put("green", "gn");
-
-        TreeMap<String,String> treeMap = new TreeMap<>(myMap);
-        for(Map.Entry<String,String> myTreeMap: treeMap.entrySet()){
-            System.out.println("the key: "+myTreeMap.getKey()+" the value: "+myTreeMap.getValue());
-        }
-
-
-
-
-
-//        System.out.println("reversed order");
-//        Map<String, String> sortedMap = myMap.entrySet()
-//                .stream()
-//                .sorted(Collections.reverseOrder(Map.Entry.comparingByKey()))
-//                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
-//
-//        //System.out.println("ascending order");
-////        Map<String, String> sortedMap = myMap.entrySet()
-////                .stream()
-////                .sorted(Map.Entry.comparingByKey())
-////                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
-//
-//        for (Map.Entry<String, String> entry : sortedMap.entrySet()) {
-//            System.out.println(entry.getKey() + ": " + entry.getValue());
-//        }
+        new TreeMap<>(myMap).forEach((k, v) -> System.out.println(k + " : " + v));
     }
 }
