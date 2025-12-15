@@ -1,9 +1,7 @@
 package com.java.programs;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class SortEvenOddPair {
     public static void main(String[] args) {
@@ -21,18 +19,14 @@ public class SortEvenOddPair {
             }
         }
 
-        // Sort even and odd numbers
-        Collections.sort(evenNumbers);
-        Collections.sort(oddNumbers);
+        System.out.println("Even Numbers: " + evenNumbers);
+        System.out.println("Odd Numbers: " + oddNumbers);
 
-        // Interleave even and odd numbers while printing
-        int i = 0;
-        int j = 0;
-        while (i < evenNumbers.size() && j < oddNumbers.size()) {
-            System.out.print(evenNumbers.get(i) + " ");
-            i++;
-            System.out.print(oddNumbers.get(j) + " ");
-            j++;
-        }
+        Map<Boolean, List<Integer>> collect = myList.stream().collect(Collectors.partitioningBy(num -> num % 2 == 0));
+
+        List<Integer> integers = collect.get(true);
+        List<Integer> integers1 = collect.get(false);
+        System.out.println("\nEven Numbers: " + integers);
+        System.out.println("Odd Numbers: " + integers1);
     }
 }
