@@ -1,50 +1,74 @@
 package com.java.programs;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
-class Engine{
+final class Engine {
+
     private final int speed;
+
     private final List<String> types;
+
     public Engine(int speed, List<String> types) {
         this.speed = speed;
-        this.types = types;
+        this.types = Collections.unmodifiableList(new ArrayList<>(types));
     }
+
     public int getSpeed() {
         return speed;
     }
+
     public List<String> getTypes() {
         return types;
     }
+
 }
 
-//make a class as final
-//make variables as final and private
-//no setter method
-//make deep copy of the object
 public final class ImmutableClass {
+
     private final int id;
     private final String name;
     private final Engine engine;
 
-    public ImmutableClass(int id, String name, Engine engine){
-        this.id=id;
-        this.name=name;
-        this.engine= new Engine(engine.getSpeed(),engine.getTypes());
+    public ImmutableClass(int id, String name, Engine engine) {
+        super();
+        this.id = id;
+        this.name = name;
+        // Deep copy of Engine
+        this.engine = new Engine(engine.getSpeed(), engine.getTypes());
     }
-    public int getId(){
+
+    public int getId() {
         return id;
     }
-    public String getName(){
+
+    public String getName() {
         return name;
     }
 
-    public static void main(String[] args) {
-        Engine eng = new Engine(50,Arrays.asList("gasoline","fuel"));
-        ImmutableClass immutableClass = new ImmutableClass(1,"tata",eng);
-        System.out.println(immutableClass.name=="tata");
-        System.out.println(immutableClass.name=="mahindra");  ///it will return false, when I changed the value of name
-        System.out.println(immutableClass.engine.getSpeed());
-        System.out.println(immutableClass.engine.getTypes());
+    public Engine getEngine() {
+        return engine; // Safe because Engine is immutable
     }
+
+    public static void main(String[] args) {
+
+        List<String> engTypes = new ArrayList<String>();
+        engTypes.add("gasoline");
+        engTypes.add("fuel");
+
+        // Try modifying original objects
+        Engine newEngine = new Engine(50, engTypes);
+        // eng.getTypes().add("diesel"); // will throw exception
+
+        ImmutableClass immutableClass = new ImmutableClass(10, "Tata", newEngine);
+
+        engTypes.add("diesel");
+
+        System.out.println(immutableClass.getEngine().getSpeed());
+        System.out.println(immutableClass.getEngine().getTypes());
+
+    }
+
 }
