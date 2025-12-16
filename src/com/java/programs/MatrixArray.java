@@ -1,5 +1,7 @@
 package com.java.programs;
 
+import java.util.Arrays;
+
 public class MatrixArray {
     public static void main(String[] args) {
 
@@ -15,5 +17,7 @@ public class MatrixArray {
             }
             System.out.println();
         }
+
+        Arrays.stream(arr).map(Arrays::toString).forEach(System.out::println);
     }
 }
