@@ -13,7 +13,7 @@ final class Engine {
 
     public Engine(int speed, List<String> types) {
         this.speed = speed;
-        this.types = Collections.unmodifiableList(new ArrayList<>(types));
+        this.types = List.copyOf(types);
     }
 
     public int getSpeed() {
@@ -33,7 +33,6 @@ public final class ImmutableClass {
     private final Engine engine;
 
     public ImmutableClass(int id, String name, Engine engine) {
-        super();
         this.id = id;
         this.name = name;
         // Deep copy of Engine

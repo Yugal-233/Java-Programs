@@ -202,14 +202,5 @@ public class EmployeeDataStream {
                         .limit(1)
                         .forEach(e -> System.out.println("Dept " + dept + " -> " + e.getName() + " : " + e.getSalary())));
 
-        System.out.println("************* treemap sorting by key ************");
-        Map<String, String> myMap = new HashMap<>();
-        myMap.put("red", "rd");
-        myMap.put("blue", "bl");
-        myMap.put("yellow", "yl");
-        myMap.put("orange", "or");
-        myMap.put("grey", "gr");
-        myMap.put("green", "gn");
-        new TreeMap<>(myMap).forEach((k, v) -> System.out.println(k + " : " + v));
     }
 }
