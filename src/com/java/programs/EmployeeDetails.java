@@ -91,6 +91,10 @@ public class EmployeeDetails {
         System.out.println("OR");
         List<Integer> list4 = myList.stream().map(Employee::getDeptId).distinct().toList();
         System.out.println(list4);
+        System.out.println("Find duplicate employees based on name + salary + deptId (ignore status)");
+        Set<String> mySet1 = new HashSet<String>();
+        List<Employee> list22 = myList.stream().filter(data->!mySet1.add(data.getName()+" "+data.getSalary()+" "+data.getSalary())).toList();
+        System.out.println(list22);
         System.out.println("Find employees belonging to a specific department");
         List<Employee> list5 = myList.stream().filter(empl -> empl.getDeptId() == 102).toList();
         System.out.println(list5);
