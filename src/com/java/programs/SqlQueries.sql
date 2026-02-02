@@ -5,7 +5,6 @@ select max(salary) from employee where salary < (select max(salary) from employe
 select empName, salary from Employee e1 where N-1 = (select count (distinct salary) from employee e2 where e2.salary>e1.salary);
 
 SQL Query to find Max Salary from each department
-
 select deptId, max(salary) from employee group by deptId
 select deptName, max(salary) from employee join department on employee.deptId=department.deptId group by deptName;
 
@@ -66,7 +65,7 @@ WHERE
 WITH RankedEmployees AS (
     SELECT
         employee_id,
-        ROW_NUMBER() OVER (PARTITION BY employee_id ORDER BY employee_id) AS row_num
+        ROW_NUMBER() OVER (PARTITION BY employee_id ORDER BY employee_id) AS rank
     FROM
         employee
 )
@@ -75,7 +74,7 @@ SELECT
 FROM
     RankedEmployees
 WHERE
-    row_num > 1;
+    rank > 1;
 
 
 
