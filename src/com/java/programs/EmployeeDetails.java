@@ -8,10 +8,10 @@ class Employee {
     int id;
     String name;
     int salary;
-    int deptId;
+    String deptId;
     String status;
 
-    public Employee(int id, String name, int salary, int deptId, String status) {
+    public Employee(int id, String name, int salary, String deptId, String status) {
         this.id = id;
         this.name = name;
         this.salary = salary;
@@ -27,7 +27,7 @@ class Employee {
         return salary;
     }
 
-    public int getDeptId() {
+    public String getDeptId() {
         return deptId;
     }
 
@@ -46,23 +46,35 @@ public class EmployeeDetails {
     public static void main(String[] args) {
 
         ArrayList<Employee> myList = new ArrayList<>();
-        myList.add(new Employee(101, "mahesh", 50000, 101, "active"));
-        myList.add(new Employee(102, "sagar", 170000, 101, "active"));
-        myList.add(new Employee(103, "sagar", 170000, 101, "inactive"));
-        myList.add(new Employee(104, "yugal", 65000, 102, "inactive"));
-        myList.add(new Employee(105, "manav", 70000, 102, "inactive"));
-        myList.add(new Employee(106, "yugal", 75000, 102, "active"));
-        myList.add(new Employee(107, "radha", 170000, 103, "active"));
-        myList.add(new Employee(108, "raghav", 85000, 103, "active"));
-        myList.add(new Employee(109, "radha", 170000, 103, "inactive"));
-        myList.add(new Employee(110, "krish", 30000, 104, "inactive"));
-        myList.add(new Employee(111, "arjun", 45000, 104, "active"));
-        myList.add(new Employee(112, "mayuri", 60000, 104, "active"));
-        myList.add(new Employee(113, "mayuri", 50000, 104, "inactive"));
-        myList.add(new Employee(114, "amit", 120000, 105, "active"));
-        myList.add(new Employee(115, "rohan", 90000, 105, "inactive"));
-        myList.add(new Employee(116, "kiran", 90000, 105, "active"));
-        myList.add(new Employee(117, "lina", 40000, 106, "active"));
+
+        myList.add(new Employee(107, "radha", 170000, "SALES", "active"));
+        myList.add(new Employee(104, "yugal", 65000, "FINANCE", "inactive"));
+        myList.add(new Employee(114, "amit", 120000, "MARKETING", "active"));
+        myList.add(new Employee(101, "mahesh", 50000, "IT", "active"));
+        myList.add(new Employee(110, "krish", 30000, "HR", "inactive"));
+        myList.add(new Employee(118, "neha", 90000, "IT", "active"));
+        myList.add(new Employee(123, "mohan", 95000, "SALES", "active"));
+        myList.add(new Employee(105, "manav", 70000, "FINANCE", "inactive"));
+        myList.add(new Employee(111, "arjun", 45000, "HR", "active"));
+        myList.add(new Employee(115, "rohan", 90000, "MARKETING", "inactive"));
+        myList.add(new Employee(102, "sagar", 170000, "IT", "active"));
+        myList.add(new Employee(112, "mayuri", 60000, "HR", "active"));
+        myList.add(new Employee(124, "kavita", 85000, "SALES", "inactive"));
+        myList.add(new Employee(116, "kiran", 90000, "MARKETING", "active"));
+        myList.add(new Employee(106, "yugal", 75000, "FINANCE", "active"));
+        myList.add(new Employee(108, "raghav", 85000, "SALES", "active"));
+        myList.add(new Employee(119, "rohit", 50000, "IT", "inactive"));
+        myList.add(new Employee(125, "sunita", 55000, "HR", "active"));
+        myList.add(new Employee(121, "priya", 90000, "FINANCE", "active"));
+        myList.add(new Employee(127, "pooja", 120000, "MARKETING", "inactive"));
+        myList.add(new Employee(103, "sagar", 170000, "IT", "inactive"));
+        myList.add(new Employee(126, "deepak", 60000, "HR", "inactive"));
+        myList.add(new Employee(120, "anita", 130000, "IT", "active"));
+        myList.add(new Employee(122, "ajay", 75000, "FINANCE", "inactive"));
+        myList.add(new Employee(117, "lina", 40000, "MARKETING", "active"));
+        myList.add(new Employee(113, "mayuri", 50000, "HR", "inactive"));
+        myList.add(new Employee(128, "vikram", 70000, "MARKETING", "active"));
+
 
         System.out.println("Find all active employees");
 
@@ -75,7 +87,7 @@ public class EmployeeDetails {
 
         System.out.println("Count total number of employees");
 
-        long count = myList.stream().count();
+        long count = myList.size();
         System.out.println(count);
 
         System.out.println("Count active vs inactive employees.");
@@ -84,19 +96,19 @@ public class EmployeeDetails {
         System.out.println(collect);
 
         System.out.println("Get distinct department IDs");
-        Set<Integer> mySet = new HashSet<Integer>();
-        List<Integer> list3 = myList.stream().filter(data -> mySet.add(data.getDeptId())).map(Employee::getDeptId)
+        Set<String> mySet = new HashSet<>();
+        List<String> list3 = myList.stream().filter(data -> mySet.add(data.getDeptId())).map(Employee::getDeptId)
                 .toList();
         System.out.println(list3);
         System.out.println("OR");
-        List<Integer> list4 = myList.stream().map(Employee::getDeptId).distinct().toList();
+        List<String> list4 = myList.stream().map(Employee::getDeptId).distinct().toList();
         System.out.println(list4);
         System.out.println("Find duplicate employees based on name + salary + deptId (ignore status)");
         Set<String> mySet1 = new HashSet<String>();
         List<Employee> list22 = myList.stream().filter(data->!mySet1.add(data.getName()+" "+data.getSalary()+" "+data.getSalary())).toList();
         System.out.println(list22);
         System.out.println("Find employees belonging to a specific department");
-        List<Employee> list5 = myList.stream().filter(empl -> empl.getDeptId() == 102).toList();
+        List<Employee> list5 = myList.stream().filter(empl -> empl.getDeptId() == "102").toList();
         System.out.println(list5);
         System.out.println("Sort employees by salary (ascending)");
         List<Employee> list6 = myList.stream().sorted(Comparator.comparing(Employee::getSalary)).toList();
@@ -111,38 +123,39 @@ public class EmployeeDetails {
         Employee employee2 = myList.stream().min(Comparator.comparing(Employee::getSalary)).get();
         System.out.println(employee2);
         System.out.println("Department-wise employee count");
-        Map<Integer, Long> collect2 = myList.stream()
+        Map<String, Long> collect2 = myList.stream()
                 .collect(Collectors.groupingBy(Employee::getDeptId, Collectors.counting()));
         System.out.println(collect2);
         System.out.println("Department-wise total salary");
-        Map<Integer, Integer> collect3 = myList.stream()
+        Map<String, Integer> collect3 = myList.stream()
                 .collect(Collectors.groupingBy(Employee::getDeptId, Collectors.summingInt(Employee::getSalary)));
         System.out.println(collect3);
         System.out.println("Department-wise average salary");
-        Map<Integer, Double> collect4 = myList.stream()
+        Map<String, Double> collect4 = myList.stream()
                 .collect(Collectors.groupingBy(Employee::getDeptId, Collectors.averagingInt(Employee::getSalary)));
         System.out.println(collect4);
-        System.out.println("Group employees by status");
 
+        System.out.println("Group employees by status");
         Map<String, List<Employee>> collect5 = myList.stream().collect(Collectors.groupingBy(Employee::getStatus));
         collect5.forEach((status, empList) -> {
             System.out.println(status + " -> " + empList);
         });
-        System.out.println("Nested grouping: dept-wise then status-wise");
 
-        Map<Integer, Map<String, List<Employee>>> collect6 = myList.stream()
+        System.out.println("Nested grouping: dept-wise then status-wise");
+        Map<String, Map<String, List<Employee>>> collect6 = myList.stream()
                 .collect(Collectors.groupingBy(Employee::getDeptId, Collectors.groupingBy(Employee::getStatus)));
-        collect6.forEach((dept, myMap) -> {
-            System.out.println("dept :" + dept + " Employee :" + myMap);
+        collect6.forEach((dept, employees) -> {
+            System.out.println("dept :" + dept + " Employee :" + employees);
         });
+
         System.out.println("Find highest paid employee in each department");
-        Map<Integer, Optional<Employee>> collect7 = myList.stream().collect(Collectors.groupingBy(Employee::getDeptId,
+        Map<String, Optional<Employee>> collect7 = myList.stream().collect(Collectors.groupingBy(Employee::getDeptId,
                 Collectors.maxBy(Comparator.comparing(Employee::getSalary))));
         collect7.forEach((deptId, employees) -> {
             System.out.println("deptId :" + deptId + " employees :" + employees);
         });
         System.out.println("Find employees whose salary is above department average");
-        Map<Integer, Double> collect8 = myList.stream()
+        Map<String, Double> collect8 = myList.stream()
                 .collect(Collectors.groupingBy(Employee::getDeptId, Collectors.averagingInt(Employee::getSalary)));
 
         List<Employee> list8 = myList.stream().filter(empl -> empl.getSalary() > collect8.get(empl.getDeptId()))
@@ -150,11 +163,10 @@ public class EmployeeDetails {
         System.out.println(list8);
 
         System.out.println("Find employees working in multiple departments");
-        Map<String, List<Integer>> collect9 = myList.stream().collect(
+        Map<String, List<String>> collect9 = myList.stream().collect(
                 Collectors.groupingBy(Employee::getName, Collectors.mapping(Employee::getDeptId, Collectors.toList())));
-        List<String> list9 = collect9.entrySet().stream().filter(data -> data.getValue().size() > 1)
-                .map(Map.Entry::getKey).toList();
-        System.out.println(list9);
+        List<Entry<String, List<String>>> entries = collect9.entrySet().stream().filter(data -> data.getValue().size() > 1).toList();
+        System.out.println(entries);
 
         System.out.println("Get top 2 highest paid employees overall");
         List<Employee> list10 = myList.stream().sorted(Comparator.comparing(Employee::getSalary).reversed()).limit(2)
@@ -190,23 +202,23 @@ public class EmployeeDetails {
         System.out.println(employee4);
 
         System.out.println("Find the department with the highest total salary payout");
-        Map<Integer, Integer> collect11 = myList.stream()
+        Map<String, Integer> collect11 = myList.stream()
                 .collect(Collectors.groupingBy(Employee::getDeptId, Collectors.summingInt(Employee::getSalary)));
-        Entry<Integer, Integer> max = collect11.entrySet().stream().max(Map.Entry.comparingByValue()).get();
+        Entry<String, Integer> max = collect11.entrySet().stream().max(Map.Entry.comparingByValue()).get();
         System.out.println(max);
 
         System.out.println("Find the department with the highest average salary");
-        Map<Integer, Double> collect12 = myList.stream()
+        Map<String, Double> collect12 = myList.stream()
                 .collect(Collectors.groupingBy(Employee::getDeptId, Collectors.averagingDouble(Employee::getSalary)));
-        Entry<Integer, Double> entry = collect12.entrySet().stream().max(Map.Entry.comparingByValue()).get();
+        Entry<String, Double> entry = collect12.entrySet().stream().max(Map.Entry.comparingByValue()).get();
         System.out.println(entry);
 
         System.out.println("Find the department with the second highest average salary");
-        Map<Integer, Double> collect13 = myList.stream()
+        Map<String, Double> collect13 = myList.stream()
                 .collect(Collectors.groupingBy(Employee::getDeptId, Collectors.averagingDouble(Employee::getSalary)));
-        Entry<Integer, Double> first = collect13.entrySet().stream()
-                .sorted(Map.Entry.<Integer, Double>comparingByValue().reversed()).skip(1).findFirst().get();
-        System.out.println(first);
+
+        collect13.entrySet().stream().sorted(Map.Entry.comparingByValue(Comparator.reverseOrder())).skip(1).limit(1)
+                .forEach(System.out::println);
 
     }
 }
