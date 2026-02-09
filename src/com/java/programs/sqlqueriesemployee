@@ -1,0 +1,226 @@
+|  ID | Name   | Salary | Dept      | Status   |
+| --: | ------ | -----: | --------- | -------- |
+| 107 | radha  | 170000 | SALES     | active   |
+| 104 | yugal  |  65000 | FINANCE   | inactive |
+| 114 | amit   | 120000 | MARKETING | active   |
+| 101 | mahesh |  50000 | IT        | active   |
+| 110 | krish  |  30000 | HR        | inactive |
+| 118 | neha   |  90000 | IT        | active   |
+| 123 | mohan  |  95000 | SALES     | active   |
+| 105 | manav  |  70000 | FINANCE   | inactive |
+| 111 | arjun  |  45000 | HR        | active   |
+| 115 | rohan  |  90000 | MARKETING | inactive |
+| 102 | sagar  | 170000 | IT        | active   |
+| 112 | mayuri |  60000 | HR        | active   |
+| 124 | kavita |  85000 | SALES     | inactive |
+| 116 | kiran  |  90000 | MARKETING | active   |
+| 106 | yugal  |  75000 | FINANCE   | active   |
+| 108 | raghav |  85000 | SALES     | active   |
+| 119 | rohit  |  50000 | IT        | inactive |
+| 125 | sunita |  55000 | HR        | active   |
+| 121 | priya  |  90000 | FINANCE   | active   |
+| 127 | pooja  | 120000 | MARKETING | inactive |
+| 103 | sagar  | 170000 | IT        | inactive |
+| 126 | deepak |  60000 | HR        | inactive |
+| 120 | anita  | 130000 | IT        | active   |
+| 122 | ajay   |  75000 | FINANCE   | inactive |
+| 117 | lina   |  40000 | MARKETING | active   |
+| 113 | mayuri |  50000 | HR        | inactive |
+| 128 | vikram |  70000 | MARKETING | active   |
+
+
+//List all ACTIVE employees
+select *from employee where status='active'
+
+
+//Count ACTIVE vs INACTIVE employees
+select status, count(*) emplstatus from employee group by status
+
+//Department-wise employee count
+select name, id, dept, count(*) as deptwisecount from employee group by dept;
+
+//Department-wise ACTIVE employee count
+select id, name, dept, status, count(*) as actDeptwiseCount from employee group by dept where status='active';
+
+//Highest salary in each department
+select name, id, max(salary) from employee group by dept;
+
+//Employee(s) earning highest salary overall
+
+select*from employee where salary = (select max(salary) from employee);
+
+select *from employee order by salary desc fetch first 1 row only
+
+select *from (select e.* rank() over (order by salary desc) rank from employee e) t where rank=1;
+
+select *from (select e.* dense_rank() over (order by salary desc) rank from employee e) t where rank=1;
+
+//Second highest salary (WITHOUT LIMIT)
+
+select max(salary) from employee where salary < (select max(salary) from employee)
+
+select salary from employee order by salary desc offset 1 limit 1
+
+SELECT DISTINCT salary FROM employee ORDER BY salary DESC LIMIT 1 OFFSET 1;
+
+select id, name, salary from (select id, name, salary row_number() over (order by salary desc) rank from employee ) t where rank =2;
+
+select id, name, salary from (select id, name, salary DENSE_RANK() over (order by salary desc) rank from employee ) t where rank =2;
+
+select id, name, salary from (select id, name, salary RANK() over (order by salary desc) rank from employee ) t where rank =2;
+
+select id, name, salary, max(salary) from employee e1 where 1 = (select count(distinct salary) from employee e2 where e2.salary>e1.salary)
+
+//Employee with second highest salary
+
+select *from employee where salary = (select max(salary) from employee where salary< (select max(salary) from employee));
+
+select *from employee order by salary desc offset 1 limit 1;
+
+select *from employee where salary = (select distinct salary from employee order by salary desc limit 1 offset 1);
+
+select *from (select empl.* row_number() over (order by salary desc) rank from employee e) t where rank=2;
+
+select *from (select empl.* dense_number() over (order by salary desc) rank from employee e) t where rank=2;
+
+select *from (select empl.* rank() over (order by salary desc) rank from employee e) t where rank=2;
+
+//Duplicate employees by NAME
+
+select id, name, count(*) as duplCount from employee group by name having count(*)>1;
+
+select *from (select *from e.* row_number() over (partition by name order by id) as rank) from employee) t where rank>1;
+
+//Employees working in multiple departments
+select name from employee group by name having count(distinct dept)>1;
+SELECT * FROM employee WHERE name IN ( SELECT name FROM employee GROUP BY name HAVING COUNT(DISTINCT dept) > 1) ORDER BY name, dept;
+
+
+//Same salary in different departments
+select salary, name group by salary having count(distinct dept)>1
+
+select *from employee where salary in (select salary from employee group by salary having count(distinct dept)>1) order by salary, dept;
+
+//Top 2 highest paid employees overall
+
+select *from employee order by salary desc fetch first 2 rows only
+
+select *from employee order by salary desc limit 2
+
+select *from (select e.* rank() over(order by salary desc) as rank from employee) t where rank<=2;
+select *from (select e.* dense_rank() over(order by salary desc) as rank from employee) t where rank<=2;
+select *from (select e.* row_number() over(order by salary desc) as rank from employee) t where rank<=2;
+
+select *from employee where salary in (select distinct salary from employee order by salary desc limit 2) order by salary
+
+//Top 2 highest paid employees per department
+
+select *from (select e.* row_number() over(partition by dept order by salary desc) as rank from employee e) t where rank<=2 order by dept, salary desc;
+
+select *from (select e.* rank() over(partition by dept order by salary desc) as rank from employee e) t where rank<=2 order by dept, salary desc;
+
+select *from (select e.* dense_rank() over(partition by dept order by salary desc) as rank from employee e) t where rank<=2 order by dept, salary desc;
+
+//Employees earning more than department average
+
+select * from (select e.*, avg(salary) row_number() over (partition by dept) as rank from employee e) t where salary>rank
+
+//Department with highest total salary payout
+
+select dept, sum(salary) as totalsal from employee group by dept order by totalsal desc limit 1;
+
+select dept, total_salary from (select dept, sum(salary) as total_salary row_number() over(order by sum(salary) desc) as rank from employee) t where rank=1
+
+//Department with highest average salary
+
+select dept, avg(salary) from employee group by dept order by avg(salary) desc limit 1;
+
+select dept, avg(salary) from employee group by dept order by avg(salary) desc fetch first 1 row only;
+
+select dept, avg_salary from (select dept, avg(salary) as avg_salary, rank() over (order by avg(salary) desc) as rank from employee group by dept ) t where rank=1;
+
+//Second highest average salary department
+select dept, avg(salary) from employee group by dept order by avg(salary) desc offset 1 limit 1;
+
+select dept, avg_salary from (select dept, avg(salary), row_number() over (order by avg(salary) desc) as rank from employee group by dept) t where rank=2;
+
+//ACTIVE employees earning less than INACTIVE average
+select name, id, salary where status='active' and salary< (select avg(salary) from employee where status='inactive');
+
+//Find departments having NO inactive employees
+select dept from employee group by dept having count(case when status='inactive' then 1 else 0 end)=0;
+
+select distinct dept from employee where dept not in (select dept from employee where status='inactive')
+
+
+//Highest paid ACTIVE employee per department
+select * from (select e.*, rank() over (partition by dept order by salary desc) as rank from employee e where status='active') t where rank=1;
+
+//Employees earning exactly department average
+
+SELECT * FROM employee e WHERE salary = (  SELECT AVG(salary)  FROM employee WHERE deptId = e.deptId);
+
+//Employees with same NAME but different SALARY
+SELECT name FROM employee GROUP BY name HAVING COUNT(DISTINCT salary) > 1;
+
+//Remove duplicates keeping highest salary (logical)
+SELECT * FROM ( ELECT e.*, ROW_NUMBER() OVER (PARTITION BY name ORDER BY salary DESC) rn FROM employee e ) WHERE rn = 1;
+
+//First inactive employee (order by id)
+SELECT * FROM employee WHERE status='inactive' ORDER BY id FETCH FIRST 1 ROW ONLY;
+
+//Employees earning more than manager (assume manager = dept max)
+
+SELECT * FROM employee e WHERE salary < ( SELECT MAX(salary) FROM employee  WHERE deptId = e.deptId);
+
+//Count employees earning above company average
+SELECT COUNT(*) FROM employee WHERE salary > (SELECT AVG(salary) FROM employee);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

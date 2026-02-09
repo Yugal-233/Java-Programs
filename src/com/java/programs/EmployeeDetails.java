@@ -95,6 +95,11 @@ public class EmployeeDetails {
                 .collect(Collectors.groupingBy(Employee::getStatus, Collectors.counting()));
         System.out.println(collect);
 
+        System.out.println("Count active & inactive employees per department");
+        Map<String, Map<String, Long>> collect1 = myList.stream().collect(Collectors.groupingBy(Employee::getDeptId, Collectors.groupingBy(Employee::getStatus, Collectors.counting())));
+        System.out.println(collect1);
+
+
         System.out.println("Get distinct department IDs");
         Set<String> mySet = new HashSet<>();
         List<String> list3 = myList.stream().filter(data -> mySet.add(data.getDeptId())).map(Employee::getDeptId)
@@ -104,8 +109,8 @@ public class EmployeeDetails {
         List<String> list4 = myList.stream().map(Employee::getDeptId).distinct().toList();
         System.out.println(list4);
         System.out.println("Find duplicate employees based on name + salary + deptId (ignore status)");
-        Set<String> mySet1 = new HashSet<String>();
-        List<Employee> list22 = myList.stream().filter(data->!mySet1.add(data.getName()+" "+data.getSalary()+" "+data.getSalary())).toList();
+        Set<String> mySet1 = new HashSet<>();
+        List<Employee> list22 = myList.stream().filter(data -> !mySet1.add(data.getName() + " " + data.getSalary() + " " + data.getSalary())).toList();
         System.out.println(list22);
         System.out.println("Find employees belonging to a specific department");
         List<Employee> list5 = myList.stream().filter(empl -> empl.getDeptId() == "102").toList();
@@ -167,6 +172,11 @@ public class EmployeeDetails {
                 Collectors.groupingBy(Employee::getName, Collectors.mapping(Employee::getDeptId, Collectors.toList())));
         List<Entry<String, List<String>>> entries = collect9.entrySet().stream().filter(data -> data.getValue().size() > 1).toList();
         System.out.println(entries);
+
+        System.out.println("Find employees with same salary but different departments");
+        Map<Integer, Set<String>> collect14 = myList.stream().collect(Collectors.groupingBy(Employee::getSalary, Collectors.mapping(Employee::getDeptId, Collectors.toSet())));
+        List<Entry<Integer, Set<String>>> entries1 = collect14.entrySet().stream().filter(data -> data.getValue().size() > 1).toList();
+        System.out.println(entries1);
 
         System.out.println("Get top 2 highest paid employees overall");
         List<Employee> list10 = myList.stream().sorted(Comparator.comparing(Employee::getSalary).reversed()).limit(2)
