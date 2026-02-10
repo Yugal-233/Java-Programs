@@ -113,7 +113,7 @@ public class EmployeeDetails {
         List<Employee> list22 = myList.stream().filter(data -> !mySet1.add(data.getName() + " " + data.getSalary() + " " + data.getSalary())).toList();
         System.out.println(list22);
         System.out.println("Find employees belonging to a specific department");
-        List<Employee> list5 = myList.stream().filter(empl -> empl.getDeptId() == "102").toList();
+        List<Employee> list5 = myList.stream().filter(empl -> empl.getDeptId().equalsIgnoreCase("IT")).toList();
         System.out.println(list5);
         System.out.println("Sort employees by salary (ascending)");
         List<Employee> list6 = myList.stream().sorted(Comparator.comparing(Employee::getSalary)).toList();
@@ -185,7 +185,7 @@ public class EmployeeDetails {
 
         System.out.println("Find the second highest salary (overall)");
         Employee employee3 = myList.stream().sorted(Comparator.comparing(Employee::getSalary).reversed()).skip(1)
-                .findFirst().get();
+                .findFirst().orElse(null);
         System.out.println(employee3);
 
         System.out.println("Find second highest paid employee per department");

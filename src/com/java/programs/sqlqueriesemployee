@@ -28,10 +28,8 @@
 | 113 | mayuri |  50000 | HR        | inactive |
 | 128 | vikram |  70000 | MARKETING | active   |
 
-
 //List all ACTIVE employees
 select *from employee where status='active'
-
 
 //Count ACTIVE vs INACTIVE employees
 select status, count(*) emplstatus from employee group by status
