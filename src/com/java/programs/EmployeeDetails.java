@@ -124,6 +124,9 @@ public class EmployeeDetails {
         System.out.println("Find the highest paid employee");
         Employee employee = myList.stream().max(Comparator.comparing(Employee::getSalary)).get();
         System.out.println(employee);
+        System.out.println("Find the highest paid all employees");
+        myList.stream().filter(empl -> empl.getSalary() == employee.getSalary()).forEach(System.out::println);
+
         System.out.println("Find the lowest paid employee");
         Employee employee2 = myList.stream().min(Comparator.comparing(Employee::getSalary)).get();
         System.out.println(employee2);
