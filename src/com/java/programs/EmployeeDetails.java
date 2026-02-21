@@ -162,6 +162,26 @@ public class EmployeeDetails {
         collect7.forEach((deptId, employees) -> {
             System.out.println("deptId :" + deptId + " employees :" + employees);
         });
+
+        myList.stream().collect(Collectors.groupingBy(Employee::getDeptId))
+                        .forEach((dept, employees)->{
+                            Employee employee1 = employees.stream().max(Comparator.comparing(Employee::getSalary)).get();
+                            System.out.println("dept :" + dept + " Employee :" + employee1);
+                        });
+
+        myList.stream().collect(Collectors.groupingBy(Employee::getDeptId))
+                        .forEach((dept, employees)->{
+                            employees.stream().sorted(Comparator.comparing(Employee::getSalary).reversed()).limit(1).forEach(System.out::println);
+                        });
+
+        System.out.println("Find all highest paid employees in each department");
+
+        myList.stream().collect(Collectors.groupingBy(Employee::getDeptId))
+                .forEach((dept, employees)->{
+                    int asInt = employees.stream().mapToInt(Employee::getSalary).max().getAsInt();
+                    employees.stream().filter(empls->empls.getSalary()==asInt).forEach(System.out::println);
+                });
+
         System.out.println("Find employees whose salary is above department average");
         Map<String, Double> collect8 = myList.stream()
                 .collect(Collectors.groupingBy(Employee::getDeptId, Collectors.averagingInt(Employee::getSalary)));
