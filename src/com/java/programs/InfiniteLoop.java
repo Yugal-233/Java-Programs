@@ -1,4 +1,4 @@
-package com.java.datastructure;
+package com.java.programs;
 
 public class InfiniteLoop {
     public static void main(String[] args) {

@@ -56,6 +56,7 @@ public class FunctionPredicateConsumerStd {
         std.add(new Student(20, "leena"));
         std.add(new Student(35, "pritam"));
         std.add(new Student(78, "raghav"));
+        std.add(new Student(25, "mayuri"));
 
         //        Student[] std = {
         //        new Student(89, "yugal"),
