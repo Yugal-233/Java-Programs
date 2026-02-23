@@ -206,6 +206,9 @@ public class EmployeeDetails {
                 .toList();
         System.out.println(list10);
 
+        System.out.println("Get distinct top 2 highest paid salaried employees overall");
+        System.out.println("later please develop logic to get top 2 distinct salaried employees overall");
+
         System.out.println("Find the second highest salary (overall)");
         Employee employee3 = myList.stream().sorted(Comparator.comparing(Employee::getSalary).reversed()).skip(1)
                 .findFirst().orElse(null);
