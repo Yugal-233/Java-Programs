@@ -14,7 +14,7 @@ public class FirstLastDigitSum {
         System.out.println(numericValue1+numericValue);
 
 
-        System.out.println("second way");
+        System.out.println("second way.");
 
         int num = 12345;
         int lastdigit = num % 10;
