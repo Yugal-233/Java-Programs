@@ -4,34 +4,25 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
 final class Engine {
-
     private final int speed;
-
     private final List<String> types;
-
     public Engine(int speed, List<String> types) {
         this.speed = speed;
         this.types = List.copyOf(types);
     }
-
     public int getSpeed() {
         return speed;
     }
-
     public List<String> getTypes() {
         return types;
     }
-
 }
 
 public final class ImmutableClass {
-
     private final int id;
     private final String name;
     private final Engine engine;
-
     public ImmutableClass(int id, String name, Engine engine) {
         this.id = id;
         this.name = name;
@@ -42,11 +33,9 @@ public final class ImmutableClass {
     public int getId() {
         return id;
     }
-
     public String getName() {
         return name;
     }
-
     public Engine getEngine() {
         return engine; // Safe because Engine is immutable
     }

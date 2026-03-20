@@ -102,7 +102,7 @@ public class EmployeeDetails {
 
         System.out.println("Get distinct department IDs");
         Set<String> mySet = new HashSet<>();
-        List<String> list3 = myList.stream().filter(data -> mySet.add(data.getDeptId())).map(Employee::getDeptId)
+        List<String> list3 = myList.stream().map(Employee::getDeptId).filter(mySet::add)
                 .toList();
         System.out.println(list3);
         System.out.println("OR");
@@ -164,15 +164,15 @@ public class EmployeeDetails {
         });
 
         myList.stream().collect(Collectors.groupingBy(Employee::getDeptId))
-                        .forEach((dept, employees)->{
-                            Employee employee1 = employees.stream().max(Comparator.comparing(Employee::getSalary)).get();
-                            System.out.println("dept :" + dept + " Employee :" + employee1);
-                        });
+                .forEach((dept, employees)->{
+                    Employee employee1 = employees.stream().max(Comparator.comparing(Employee::getSalary)).orElse(null);
+                    System.out.println("dept :" + dept + " Employee :" + employee1);
+                });
 
         myList.stream().collect(Collectors.groupingBy(Employee::getDeptId))
-                        .forEach((dept, employees)->{
-                            employees.stream().sorted(Comparator.comparing(Employee::getSalary).reversed()).limit(1).forEach(System.out::println);
-                        });
+                .forEach((dept, employees)->{
+                    employees.stream().sorted(Comparator.comparing(Employee::getSalary).reversed()).limit(1).forEach(System.out::println);
+                });
 
         System.out.println("Find all highest paid employees in each department");
 
@@ -222,7 +222,7 @@ public class EmployeeDetails {
 
         System.out.println("Partition employees into ACTIVE and INACTIVE");
         Map<Boolean, List<Employee>> collect10 = myList.stream()
-                .collect(Collectors.groupingBy(empl -> empl.getStatus().equals("active")));
+                .collect(Collectors.partitioningBy(empl -> empl.getStatus().equals("active")));
 
         List<Employee> activeEmpl = collect10.get(true);
         List<Employee> inactiveEmpl = collect10.get(false);
@@ -234,19 +234,19 @@ public class EmployeeDetails {
                 .filter(empl1 -> empl1.getSalary() > 80000).toList();
         System.out.println(list11);
         System.out.println("Find FIRST inactive employee");
-        Employee employee4 = myList.stream().filter(e -> "inactive".equalsIgnoreCase(e.getStatus())).findFirst().get();
+        Employee employee4 = myList.stream().filter(e -> "inactive".equalsIgnoreCase(e.getStatus())).findFirst().orElse(null);
         System.out.println(employee4);
 
         System.out.println("Find the department with the highest total salary payout");
         Map<String, Integer> collect11 = myList.stream()
                 .collect(Collectors.groupingBy(Employee::getDeptId, Collectors.summingInt(Employee::getSalary)));
-        Entry<String, Integer> max = collect11.entrySet().stream().max(Map.Entry.comparingByValue()).get();
+        Entry<String, Integer> max = collect11.entrySet().stream().max(Map.Entry.comparingByValue()).orElse(null);
         System.out.println(max);
 
         System.out.println("Find the department with the highest average salary");
         Map<String, Double> collect12 = myList.stream()
                 .collect(Collectors.groupingBy(Employee::getDeptId, Collectors.averagingDouble(Employee::getSalary)));
-        Entry<String, Double> entry = collect12.entrySet().stream().max(Map.Entry.comparingByValue()).get();
+        Entry<String, Double> entry = collect12.entrySet().stream().max(Map.Entry.comparingByValue()).orElse(null);
         System.out.println(entry);
 
         System.out.println("Find the department with the second highest average salary");
