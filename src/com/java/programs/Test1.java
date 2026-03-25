@@ -17,7 +17,7 @@ public class Test1 {
                 .collect(Collectors.toList());
         System.out.println(collect1);
 
-        String s = Arrays.stream(strData).reduce((word1, word2) -> word2 + " " + word1).get();
+        String s = Arrays.stream(strData).reduce((word1, word2) -> word2 + " " + word1).orElse(null);
         System.out.println(s);
 
         String collect2 = Stream.of(str).map(s1 -> new StringBuffer(str).reverse().toString()).collect(Collectors.joining(" "));
@@ -30,7 +30,7 @@ public class Test1 {
         System.out.println(collect3);
 
         HashSet<String> mySet =  new HashSet<>();
-        String collect4 = Arrays.stream(strData).filter(n -> mySet.add(n)).collect(Collectors.joining(" "));
+        String collect4 = Arrays.stream(strData).filter(mySet::add).collect(Collectors.joining(" "));
         System.out.println(collect4);
 
         String output= "";
