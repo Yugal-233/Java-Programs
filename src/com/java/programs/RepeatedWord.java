@@ -53,5 +53,15 @@ public class RepeatedWord {
 
         List<String> dataList =  new ArrayList<>(new HashSet<>(myListData));
         System.out.println(dataList);
+
+        System.out.println("******************sixth approach*************");
+
+        Map<String, Long> collect1 = Arrays.stream(strData).collect(Collectors.groupingBy(String::toString, Collectors.counting()));
+
+        Map.Entry<String, Long> entry = collect1.entrySet().stream().max(Map.Entry.comparingByValue()).orElse(null);
+        System.out.println(entry);
+
+        List<Map.Entry<String, Long>> list = collect1.entrySet().stream().filter(data->data.getValue()==entry.getValue()).toList();
+        System.out.println(list);
     }
 }
