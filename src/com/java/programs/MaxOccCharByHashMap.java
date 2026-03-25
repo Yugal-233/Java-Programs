@@ -2,7 +2,6 @@ package com.java.programs;
 
 import java.util.HashMap;
 import java.util.Map;
-
 public class MaxOccCharByHashMap {
     public static void main(String[] args) {
         HashMap<Character,Integer> myMap =  new HashMap<>();
@@ -27,7 +26,7 @@ public class MaxOccCharByHashMap {
         }
         System.out.println("Max number occurred character : "+max + " : "+"max time occurred character: "+maxChar);
 
-        Character character2 = myMap.entrySet().stream().max(Map.Entry.comparingByValue()).map(Map.Entry::getKey).get();
+        Character character2 = myMap.entrySet().stream().max(Map.Entry.comparingByValue()).map(Map.Entry::getKey).orElse(null);
         System.out.println("character2: "+character2);
 
     }

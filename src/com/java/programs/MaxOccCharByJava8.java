@@ -1,14 +1,11 @@
 package com.java.programs;
 
-import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static java.util.Map.Entry.comparingByValue;
 import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
-
 public class MaxOccCharByJava8 {
     public static void main(String[] args) {
         String s ="my name is yugal chaudhari and I am a sofyware engineer";
