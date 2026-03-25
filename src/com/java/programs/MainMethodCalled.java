@@ -1,7 +1,6 @@
 package com.java.programs;
-
 interface MyInterf{
-    public static void main(String[] args) {
+    static void main(String[] args) {
         System.out.println("Main method called");
     }
 }
