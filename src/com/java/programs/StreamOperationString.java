@@ -129,5 +129,8 @@ public class StreamOperationString {
 
         System.out.println("************* parallel stream ordered ************");
         words.parallelStream().forEachOrdered(System.out::println);
+
+        System.out.println("************* sequential stream ***********");
+        words.stream().sequential().forEach(System.out::println);
     }
 }
