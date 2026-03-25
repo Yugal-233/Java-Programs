@@ -1,8 +1,6 @@
 package com.java.programs;
-
 record RecordEmployee(int id, String name, String department) {
 }
-
 public class RecordEmployeeData {
     public static void main(String[] args) {
         RecordEmployee employee1 = new RecordEmployee(1, "Alice", "HR");
