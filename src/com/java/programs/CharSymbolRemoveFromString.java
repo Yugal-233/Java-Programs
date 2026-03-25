@@ -1,5 +1,4 @@
 package com.java.programs;
-
 public class CharSymbolRemoveFromString {
     public static void main(String[] args) {
         String s = "1A56#2B#EFH*2LAGD5T";

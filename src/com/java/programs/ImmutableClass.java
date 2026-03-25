@@ -42,7 +42,7 @@ public final class ImmutableClass {
 
     public static void main(String[] args) {
 
-        List<String> engTypes = new ArrayList<String>();
+        List<String> engTypes = new ArrayList<>();
         engTypes.add("gasoline");
         engTypes.add("fuel");
 

@@ -3,14 +3,13 @@ package com.java.programs;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 public class Find10thEmplFrom100 {
     public static void main(String[] args) {
         ArrayList<Integer> myList = new ArrayList<>();
         for (int i = 1; i < 101; i++) {
             myList.add(i);
         }
-        int max = myList.stream().max(Integer::compare).get();
+        int max = myList.stream().max(Integer::compare).orElse(null);
         System.out.println(max);
         System.out.println(myList);
        int number =  myList.stream().skip(9).findFirst().orElse(null);

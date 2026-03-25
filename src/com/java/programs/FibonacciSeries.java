@@ -3,7 +3,6 @@ package com.java.programs;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
 public class FibonacciSeries {
     public static void main(String[] args) {
         int num1=0;

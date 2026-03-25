@@ -1,7 +1,6 @@
 package com.java.programs;
 
 import java.util.Objects;
-
 public class EqualsAndHashcodeMethod {
   private int id;
   private String name;

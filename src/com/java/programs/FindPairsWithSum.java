@@ -2,7 +2,6 @@ package com.java.programs;
 
 import java.util.Arrays;
 import java.util.List;
-
 public class FindPairsWithSum {
     public static void main(String[] args) {
         List<Integer> myList = Arrays.asList(10, 20, 30, 50, 40, 8, 60);

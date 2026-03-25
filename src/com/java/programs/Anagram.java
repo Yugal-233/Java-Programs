@@ -1,7 +1,6 @@
 package com.java.programs;
 
 import java.util.Arrays;
-
 public class Anagram {
     public static void main(String[] args) {
         String str1 = "abc";

@@ -1,5 +1,4 @@
 package com.java.programs;
-
 public class ArmstrongNumber {
     public static void main(String[] args) {
         int n = 153;
