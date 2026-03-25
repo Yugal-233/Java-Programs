@@ -3,9 +3,7 @@ package com.java.programs;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class SortingReverseOrder {
     public static void main(String[] args) {
@@ -13,10 +11,10 @@ public class SortingReverseOrder {
 
         myList1.stream().sorted(Collections.reverseOrder()).forEach(System.out::println);
         System.out.println("**********************************");
-        List<Integer> revList=  myList1.stream().sorted((e1,e2)->e1<e2?1:e1>e2?-1:0).collect(Collectors.toList());
+        List<Integer> revList=  myList1.stream().sorted((e1,e2)-> e2.compareTo(e1)).collect(Collectors.toList());
         System.out.println(revList);
         System.out.println("**********************************");
-        myList1.stream().sorted((e1, e2)->e1<e2?1:e1>e2?-1:0).forEach(System.out::println);
+        myList1.stream().sorted((e1, e2)-> e2.compareTo(e1)).forEach(System.out::println);
 
 
         System.out.println("********reverse string*********");
