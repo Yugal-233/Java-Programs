@@ -27,7 +27,7 @@ public class PalindromeString {
 
         System.out.println("********************************");
         String s1 ="aba";
-        StringBuffer sb = new StringBuffer(s1);
+        StringBuilder sb = new StringBuilder(s1);
         sb.reverse();
         String s2 = sb.toString();
         if(s1.equalsIgnoreCase(s2)){
