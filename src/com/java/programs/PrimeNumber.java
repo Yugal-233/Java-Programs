@@ -1,8 +1,6 @@
 package com.java.programs;
 
 import java.util.ArrayList;
-import java.util.Scanner;
-
 public class PrimeNumber {
     public static void main(String[] args) {
         int n = 17;
@@ -26,8 +24,6 @@ public class PrimeNumber {
                     c++;
             if (c == 2)
                 a.add(x);
-            else
-                continue;
         }
         System.out.println(a);
     }

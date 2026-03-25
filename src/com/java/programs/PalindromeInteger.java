@@ -1,5 +1,4 @@
 package com.java.programs;
-
 public class PalindromeInteger {
     public static void main(String[] args) {
         int n = 121;

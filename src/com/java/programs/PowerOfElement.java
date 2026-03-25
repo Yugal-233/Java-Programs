@@ -1,5 +1,4 @@
 package com.java.programs;
-
 public class PowerOfElement {
     public static void main(String[] args) {
         double base = 2.0; // Base value

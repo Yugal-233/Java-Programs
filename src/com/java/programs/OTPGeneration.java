@@ -1,9 +1,6 @@
 package com.java.programs;
 
-import java.util.function.Consumer;
-import java.util.function.Function;
 import java.util.function.Supplier;
-
 public class OTPGeneration {
     public static void main(String[] args) {
         System.out.println("First way");

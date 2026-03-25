@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
 public class PartitionBy {
     public static void main(String[] args) {
         List<Integer> myList = Arrays.asList(10,23,56,14,53,89,47,32,56,89);

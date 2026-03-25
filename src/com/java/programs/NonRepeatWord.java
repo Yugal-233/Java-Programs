@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
 public class NonRepeatWord {
     public static void main(String[] args) {
         String str = "apple banana apple cherry banana";
@@ -40,7 +39,7 @@ public class NonRepeatWord {
         Map<String, Long> wordCountMap = words1.stream()
                 .collect(Collectors.groupingBy(String::toString, Collectors.counting()));
 
-        List<String> nonRepeatingWords = wordCountMap.entrySet().stream().filter(entry->entry.getValue()==1).map(Map.Entry::getKey).collect(Collectors.toList());
+        List<String> nonRepeatingWords = wordCountMap.entrySet().stream().filter(entry -> entry.getValue() == 1).map(Map.Entry::getKey).toList();
 
         for(Map.Entry<String, Long> map : wordCountMap.entrySet()){
             if(map.getValue()==1){
