@@ -6,7 +6,6 @@ import java.util.List;
 public class ReduceOperationString {
 
     public static void main(String[] args) {
-
         List<String> words = Arrays.asList("java", "stream", "reduce", "api");
 
         System.out.println("************* reverse order of words ************");
@@ -14,11 +13,11 @@ public class ReduceOperationString {
         System.out.println(reduce);
 
         System.out.println("************* concatenate all words ************");
-        String reduce2 = words.stream().reduce("", (a, b) -> a + b);
+        String reduce2 = words.stream().reduce((a, b) -> a + b).orElse("");
         System.out.println(reduce2);
 
         System.out.println("************* concatenate with space ************");
-        String result = words.stream().reduce("", (a, b) -> a + " " + b).trim();
+        String result = words.stream().reduce((a, b) -> a + " " + b).orElse("");
         System.out.println(result);
 
         System.out.println("************* concatenate with comma ************");
@@ -26,7 +25,7 @@ public class ReduceOperationString {
         System.out.println(orElse);
 
         System.out.println("************* longest word ************");
-        String reduce3 = words.stream().reduce((a, b) -> a.length() >= b.length() ? a : b).get();
+        String reduce3 = words.stream().reduce((a, b) -> a.length() >= b.length() ? a : b).orElse("");
         System.out.println(reduce3);
 
         System.out.println("************* shortest word ************");
@@ -42,7 +41,7 @@ public class ReduceOperationString {
         System.out.println(reduce4);
 
         System.out.println("************* uppercase concatenation ************");
-        String reduce5 = words.stream().map(data -> data.toUpperCase()).reduce((a, b) -> a + b).get();
+        String reduce5 = words.stream().map(String::toUpperCase).reduce((a, b) -> a +" "+ b).get();
         System.out.println(reduce5);
 
         System.out.println("************* reverse concatenation with space ************");
