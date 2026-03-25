@@ -1,10 +1,6 @@
 package com.java.programs;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.IntSummaryStatistics;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.*;
 import java.util.stream.IntStream;
 
 public class StreamOperationInteger {
@@ -24,7 +20,7 @@ public class StreamOperationInteger {
                 Arrays.asList(1, 2),
                 Arrays.asList(3, 4)
         );
-        list.stream().flatMap(l -> l.stream()).forEach(System.out::println);
+        list.stream().flatMap(Collection::stream).forEach(System.out::println);
 
         System.out.println("************* remove duplicate elements ************");
         numbers.stream().distinct().forEach(System.out::println);
@@ -48,13 +44,13 @@ public class StreamOperationInteger {
                 .forEach(System.out::println);
 
         System.out.println("************* print all elements ************");
-        numbers.stream().forEach(System.out::println);
+        numbers.forEach(System.out::println);
 
         System.out.println("************* parallel stream with order ************");
         numbers.parallelStream().forEachOrdered(System.out::println);
 
         System.out.println("************* collect elements into list ************");
-        List<Integer> collectedList = numbers.stream().collect(Collectors.toList());
+        List<Integer> collectedList = new ArrayList<>(numbers);
         System.out.println(collectedList);
 
         System.out.println("************* sum using reduce ************");
