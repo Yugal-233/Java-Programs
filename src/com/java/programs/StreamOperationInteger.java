@@ -58,7 +58,7 @@ public class StreamOperationInteger {
         System.out.println(sumUsingReduce);
 
         System.out.println("************* count elements ************");
-        long count = numbers.stream().count();
+        long count = numbers.size();
         System.out.println(count);
 
         System.out.println("************* minimum element ************");
