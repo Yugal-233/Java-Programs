@@ -29,7 +29,7 @@ public class SortString {
         System.out.println(ch);
 
         System.out.println("****************another approach***********");
-        String collect = str.chars().sorted().mapToObj(c -> (char) c).map(String::valueOf).collect(Collectors.joining());
+        String collect = str.chars().sorted().mapToObj(c -> String.valueOf((char) c)).collect(Collectors.joining());
         System.out.println(collect);
     }
 }
