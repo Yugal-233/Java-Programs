@@ -2,7 +2,6 @@ package com.java.programs;
 
 import java.util.Arrays;
 import java.util.List;
-
 public class ReduceOperationInteger {
 
     public static void main(String[] args) {
@@ -12,7 +11,7 @@ public class ReduceOperationInteger {
         Integer reduce = numbers.stream().reduce(0, Integer::sum);
         System.out.println(reduce);
 
-        Integer reduce2 = numbers.stream().reduce(1, (a, b) -> a * b);
+        Integer reduce2 = numbers.stream().reduce((a, b) -> a * b).orElse(0);
         System.out.println(reduce2);
 
         Integer orElse = numbers.stream().reduce(Integer::max).orElse(null);
