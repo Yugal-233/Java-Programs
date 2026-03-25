@@ -1,9 +1,5 @@
 package com.java.programs;
-
-import java.util.*;
-
-    public class ValidParentheses {
-
+public class ValidParentheses {
         public static void main(String[] args) {
             String s = "{[][]()}[][(])";
             int index = findInvalidParentheses(s);
