@@ -104,6 +104,6 @@ public class StreamOperationInteger {
         numbers.parallelStream().forEach(System.out::println);
 
         System.out.println("************* sequential stream ************");
-        numbers.parallelStream().sequential().forEach(System.out::println);
+        numbers.stream().sequential().forEach(System.out::println);
     }
 }
