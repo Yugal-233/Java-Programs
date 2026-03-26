@@ -77,11 +77,11 @@ select *from employee order by salary desc offset 1 limit 1;
 
 select *from employee where salary = (select distinct salary from employee order by salary desc limit 1 offset 1);
 
-select *from (select empl.* row_number() over (order by salary desc) rank from employee e) t where rank=2;
+select *from (select empl.* row_number() over (order by salary desc) rank from employee empl) t where rank=2;
 
-select *from (select empl.* dense_number() over (order by salary desc) rank from employee e) t where rank=2;
+select *from (select empl.* dense_number() over (order by salary desc) rank from employee empl) t where rank=2;
 
-select *from (select empl.* rank() over (order by salary desc) rank from employee e) t where rank=2;
+select *from (select empl.* rank() over (order by salary desc) rank from employee empl) t where rank=2;
 
 //Duplicate employees by NAME
 
