@@ -36,8 +36,7 @@ public class DuplicateElements {
 
         List<String> duplicates = wordCountMap.entrySet().stream()
                 .filter(entry -> entry.getValue() > 1)
-                .map(Map.Entry::getKey)
-                .collect(Collectors.toList());
+                .map(Map.Entry::getKey).toList();
 
         System.out.println("Duplicate words: " + duplicates);
 
