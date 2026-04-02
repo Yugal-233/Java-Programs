@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class RepeatWordCount {
 
     public static void main(String[] args) {
-        String str = "AA BB CC AA";
+        String str = "AASS BBSS CCSS AASS";
         String[] words = str.split(" ");
 
         HashMap<String, Integer> myMap = new HashMap<>();
