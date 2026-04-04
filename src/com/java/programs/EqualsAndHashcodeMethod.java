@@ -29,15 +29,15 @@ public class EqualsAndHashcodeMethod {
     public static void main(String[] args) {
         EqualsAndHashcodeMethod obj1 = new EqualsAndHashcodeMethod();
         obj1.setId(1);
-        obj1.setName("Alice");
+        obj1.setName("yugal");
 
         EqualsAndHashcodeMethod obj2 = new EqualsAndHashcodeMethod();
         obj2.setId(1);
-        obj2.setName("Alice");
+        obj2.setName("yugal");
 
         EqualsAndHashcodeMethod obj3 = new EqualsAndHashcodeMethod();
         obj3.setId(2);
-        obj3.setName("Bob");
+        obj3.setName("mayuri");
 
         // Testing equals method
         System.out.println("obj1 equals obj2: " + obj1.equals(obj2)); // Should be true
