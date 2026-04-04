@@ -15,7 +15,6 @@ public class WordCount {
                 .filter(word -> !word.isEmpty()).count();
         System.out.println(count);
 
-
         String s = str.replaceAll("\\d", "");
         System.out.println(s);
 
