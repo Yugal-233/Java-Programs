@@ -205,7 +205,9 @@ public class EmployeeDetails {
         System.out.println(list10);
 
         System.out.println("Get distinct top 2 highest paid salaried employees overall");
-        System.out.println("later please develop logic to get top 2 distinct salaried employees overall");
+        Set<Employee> treeSet = new TreeSet<>(Comparator.comparing(Employee::getSalary).reversed());
+        treeSet.addAll(myList);
+        treeSet.stream().limit(2).forEach(System.out::println);
 
         System.out.println("Find the second highest salary (overall)");
         Employee employee3 = myList.stream().sorted(Comparator.comparing(Employee::getSalary).reversed()).skip(1)
