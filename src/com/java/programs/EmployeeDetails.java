@@ -75,7 +75,6 @@ public class EmployeeDetails {
         myList.add(new Employee(113, "mayuri", 50000, "HR", "inactive"));
         myList.add(new Employee(128, "vikram", 70000, "MARKETING", "active"));
 
-
         System.out.println("Find all active employees");
 
         List<Employee> list = myList.stream().filter(empl -> empl.getStatus().equals("active")).toList();
@@ -98,7 +97,6 @@ public class EmployeeDetails {
         System.out.println("Count active & inactive employees per department");
         Map<String, Map<String, Long>> collect1 = myList.stream().collect(Collectors.groupingBy(Employee::getDeptId, Collectors.groupingBy(Employee::getStatus, Collectors.counting())));
         System.out.println(collect1);
-
 
         System.out.println("Get distinct department IDs");
         Set<String> mySet = new HashSet<>();
