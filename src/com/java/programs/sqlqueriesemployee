@@ -108,13 +108,13 @@ select *from (select e.* dense_rank() over(partition by dept order by salary des
 
 //Employees earning more than department average
 
-SELECT * FROM (SELECT e.*, AVG(salary) OVER (PARTITION BY dept) AS dept_avg FROM employee e ) t WHERE salary > dept_avg;
+SELECT * FROM (SELECT e.*, AVG(salary), row_number() OVER (PARTITION BY dept) AS dept_avg FROM employee e ) t WHERE salary > dept_avg;
 
 //Department with highest total salary payout
 
 select dept, sum(salary) as totalsal from employee group by dept order by totalsal desc limit 1;
 
-select dept, total_salary from (select dept, sum(salary) as total_salary row_number() over(order by sum(salary) desc) as rank from employee) t where rank=1
+select dept, total_salary from (select dept, sum(salary) as total_salary, row_number() over(order by sum(salary) desc) as rank from employee) t where rank=1
 
 //Department with highest average salary
 
