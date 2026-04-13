@@ -104,7 +104,7 @@ select *from employee where salary in (select distinct salary from employee orde
 
 //Top 2 highest paid employees per department
 
-select *from (select e.* dense_rank() over(partition by dept order by salary desc) as rank from employee e) t where rank<=2 order by dept, salary desc;
+select *from (select e.* dense_rank() over(partition by dept order by salary desc) as rank from employee e) t where rank<=2;
 
 //Employees earning more than department average
 
