@@ -160,6 +160,8 @@ SELECT * FROM employee e WHERE salary > (SELECT MAX(salary) FROM employee WHERE 
 //Count employees earning above company average
 SELECT COUNT(*) FROM employee WHERE salary > (SELECT AVG(salary) FROM employee);
 
+select distinct m.name from employee e join on employee m on e.mngr_id=m.emp_id where e.salary>10000;
+
 
 
 
