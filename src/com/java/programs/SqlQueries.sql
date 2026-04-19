@@ -115,3 +115,5 @@ With duplicate as(
 		select emplName, emplId, row_number() over(partition by emplName order by emplName) as rank
 		from employee)
 delete from duplicate where rank>1;
+
+select distinct m.name from employee e join on employee m on e.mngr_id=m.emp_id where e.salary>10000;

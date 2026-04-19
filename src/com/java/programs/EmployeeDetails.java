@@ -184,9 +184,7 @@ public class EmployeeDetails {
         Map<String, Double> collect8 = myList.stream()
                 .collect(Collectors.groupingBy(Employee::getDeptId, Collectors.averagingInt(Employee::getSalary)));
 
-        List<Employee> list8 = myList.stream().filter(empl -> empl.getSalary() > collect8.get(empl.getDeptId()))
-                .toList();
-        System.out.println(list8);
+        myList.stream().filter(empl -> empl.getSalary() > collect8.get(empl.getDeptId())).forEach(System.out::println);
 
         System.out.println("Find employees working in multiple departments");
         Map<String, List<String>> collect9 = myList.stream().collect(

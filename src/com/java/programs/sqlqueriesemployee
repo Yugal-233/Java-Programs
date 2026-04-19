@@ -114,7 +114,7 @@ SELECT * FROM (SELECT e.*, AVG(salary), row_number() OVER (PARTITION BY dept) AS
 
 select dept, sum(salary) as totalsal from employee group by dept order by totalsal desc limit 1;
 
-select dept, total_salary from (select dept, sum(salary) as total_salary, row_number() over(order by sum(salary) desc) as rank from employee) t where rank=1
+select dept, sum(salary)  from (select dept, sum(salary), row_number() over(order by sum(salary) desc) as rank from employee) t where rank=1
 
 //Department with highest average salary
 
@@ -159,6 +159,8 @@ SELECT * FROM employee e WHERE salary > (SELECT MAX(salary) FROM employee WHERE 
 
 //Count employees earning above company average
 SELECT COUNT(*) FROM employee WHERE salary > (SELECT AVG(salary) FROM employee);
+
+select distinct m.name from employee e join on employee m on e.mngr_id=m.emp_id where e.salary>10000;
 
 
 
