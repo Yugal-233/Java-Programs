@@ -20,7 +20,11 @@ public class SecondHighestNumber {
 
         System.out.println("*****************");
 
-        int secondHighNum = Arrays.stream(arr).distinct().boxed().sorted((a, b) -> b - a).skip(1).findFirst().orElse(null);
+        int secondHighNum = Arrays.stream(arr).distinct().boxed().sorted((a, b) -> b - a).skip(1).findFirst().orElse(0);
         System.out.println(secondHighNum);
+
+        System.out.println("*****************");
+        int i = Arrays.stream(arr).sorted().skip(arr.length - 2).findFirst().orElse(0);
+        System.out.println(i);
     }
 }
