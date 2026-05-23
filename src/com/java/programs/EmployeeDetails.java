@@ -19,26 +19,50 @@ class Employee {
         this.status = status;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getSalary() {
         return salary;
     }
 
+    public void setSalary(int salary) {
+        this.salary = salary;
+    }
+
     public String getDeptId() {
         return deptId;
+    }
+
+    public void setDeptId(String deptId) {
+        this.deptId = deptId;
     }
 
     public String getStatus() {
         return status;
     }
 
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
-        return "Employee{" + "id=" + id + ", name='" + name + '\'' + ", salary=" + salary + ", deptId=" + deptId
-                + ", status='" + status + '\'' + '}';
+        return "Employee [id=" + id + ", name=" + name + ", salary=" + salary + ", deptId=" + deptId + ", status="
+                + status + "]";
     }
 }
 
@@ -132,6 +156,9 @@ public class EmployeeDetails {
         Map<String, Long> collect2 = myList.stream()
                 .collect(Collectors.groupingBy(Employee::getDeptId, Collectors.counting()));
         System.out.println(collect2);
+        Entry<String, Long> entry = collect2.entrySet().stream().max(Map.Entry.comparingByValue()).get();
+        Long value = entry.getValue();
+        collect2.entrySet().stream().filter(data->data.getValue()==value).forEach(System.out::println);
         System.out.println("Department-wise total salary");
         Map<String, Integer> collect3 = myList.stream()
                 .collect(Collectors.groupingBy(Employee::getDeptId, Collectors.summingInt(Employee::getSalary)));
@@ -162,22 +189,22 @@ public class EmployeeDetails {
         });
 
         myList.stream().collect(Collectors.groupingBy(Employee::getDeptId))
-                .forEach((dept, employees)->{
+                .forEach((dept, employees) -> {
                     Employee employee1 = employees.stream().max(Comparator.comparing(Employee::getSalary)).orElse(null);
                     System.out.println("dept :" + dept + " Employee :" + employee1);
                 });
 
         myList.stream().collect(Collectors.groupingBy(Employee::getDeptId))
-                .forEach((dept, employees)->{
+                .forEach((dept, employees) -> {
                     employees.stream().sorted(Comparator.comparing(Employee::getSalary).reversed()).limit(1).forEach(System.out::println);
                 });
 
         System.out.println("Find all highest paid employees in each department");
 
         myList.stream().collect(Collectors.groupingBy(Employee::getDeptId))
-                .forEach((dept, employees)->{
+                .forEach((dept, employees) -> {
                     int asInt = employees.stream().mapToInt(Employee::getSalary).max().getAsInt();
-                    employees.stream().filter(empls->empls.getSalary()==asInt).forEach(System.out::println);
+                    employees.stream().filter(empls -> empls.getSalary() == asInt).forEach(System.out::println);
                 });
 
         System.out.println("Find employees whose salary is above department average");
@@ -244,8 +271,8 @@ public class EmployeeDetails {
         System.out.println("Find the department with the highest average salary");
         Map<String, Double> collect12 = myList.stream()
                 .collect(Collectors.groupingBy(Employee::getDeptId, Collectors.averagingDouble(Employee::getSalary)));
-        Entry<String, Double> entry = collect12.entrySet().stream().max(Map.Entry.comparingByValue()).orElse(null);
-        System.out.println(entry);
+        Entry<String, Double> entry1 = collect12.entrySet().stream().max(Map.Entry.comparingByValue()).orElse(null);
+        System.out.println(entry1);
 
         System.out.println("Find the department with the second highest average salary");
         Map<String, Double> collect13 = myList.stream()
